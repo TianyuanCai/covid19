@@ -5,10 +5,10 @@ import pandas as pd
 import numpy as np
 import os
 
-restaurant_file = './data/raw/restaurants.csv'
+restaurant_data_file = './data/raw/restaurants.csv'
 
 
-def get_restaurants(zip_code):
+def get_restaurant_data(zip_code):
     """
     Download restaurant data to folder, append if file aleady exists
 
@@ -37,7 +37,7 @@ def get_restaurants(zip_code):
         df = df.append(tmp_df)
         n_record = min(n_record, json.loads(r.text)['total'])
 
-    if os.path.exists(restaurant_file):
-        df.to_csv(restaurant_file, index=False, header=False, mode='a')
+    if os.path.exists(restaurant_data_file):
+        df.to_csv(restaurant_data_file, index=False, header=False, mode='a')
     else:
-        df.to_csv(restaurant_file, index=False)
+        df.to_csv(restaurant_data_file, index=False)
