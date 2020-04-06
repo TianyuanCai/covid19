@@ -1,0 +1,209 @@
+name,review_count,categories,rating,transactions,price,location.zip_code
+The Whisper House,1364,"[{'alias': 'newamerican', 'title': 'American (New)'}, {'alias': 'burgers', 'title': 'Burgers'}, {'alias': 'cocktailbars', 'title': 'Cocktail Bars'}]",4.0,"['restaurant_reservation', 'delivery']",$$,91711
+The Quarter Creole Cuisine,492,"[{'alias': 'french', 'title': 'French'}, {'alias': 'cajun', 'title': 'Cajun/Creole'}]",4.5,"['restaurant_reservation', 'delivery', 'pickup']",,91711
+Uno Tre Otto,238,"[{'alias': 'italian', 'title': 'Italian'}]",4.5,['delivery'],$$$,91711
+Bardot,1023,"[{'alias': 'newamerican', 'title': 'American (New)'}, {'alias': 'desserts', 'title': 'Desserts'}, {'alias': 'bars', 'title': 'Bars'}]",4.0,"['restaurant_reservation', 'delivery']",$$,91711
+Dr Grubb's,965,"[{'alias': 'tradamerican', 'title': 'American (Traditional)'}]",4.5,['delivery'],$$,91711
+Viva Madrid!,1267,"[{'alias': 'spanish', 'title': 'Spanish'}, {'alias': 'tapas', 'title': 'Tapas Bars'}, {'alias': 'basque', 'title': 'Basque'}]",4.0,['delivery'],$$,91711
+Buca di Beppo Italian Restaurant,1329,"[{'alias': 'italian', 'title': 'Italian'}]",3.5,"['delivery', 'pickup']",$$,91711
+The Meat Cellar,1072,"[{'alias': 'meats', 'title': 'Meat Shops'}, {'alias': 'sandwiches', 'title': 'Sandwiches'}, {'alias': 'steak', 'title': 'Steakhouses'}]",4.0,['delivery'],$$,91711
+Aruffo's Italian Cuisine,652,"[{'alias': 'italian', 'title': 'Italian'}, {'alias': 'steak', 'title': 'Steakhouses'}]",4.0,['delivery'],$$,91711
+Elvira's Finest Foods of Mexico,577,"[{'alias': 'mexican', 'title': 'Mexican'}, {'alias': 'venues', 'title': 'Venues & Event Spaces'}, {'alias': 'cocktailbars', 'title': 'Cocktail Bars'}]",4.0,['delivery'],$$,91711
+Sanamluang Thai Cuisine,1500,"[{'alias': 'thai', 'title': 'Thai'}]",4.0,['delivery'],$$,91711
+Union On Yale,815,"[{'alias': 'newamerican', 'title': 'American (New)'}, {'alias': 'pizza', 'title': 'Pizza'}, {'alias': 'cocktailbars', 'title': 'Cocktail Bars'}]",3.5,"['restaurant_reservation', 'delivery', 'pickup']",$$,91711
+Eureka!,2540,"[{'alias': 'newamerican', 'title': 'American (New)'}, {'alias': 'burgers', 'title': 'Burgers'}, {'alias': 'bars', 'title': 'Bars'}]",4.0,"['pickup', 'delivery']",$$,91711
+Magnolia Wine Bar,123,"[{'alias': 'wine_bars', 'title': 'Wine Bars'}, {'alias': 'newamerican', 'title': 'American (New)'}]",4.5,['delivery'],$$,91711
+The Orchard Restaurant,49,"[{'alias': 'newamerican', 'title': 'American (New)'}]",4.0,[],$$,91711
+Menkoi Ya Ramen,380,"[{'alias': 'ramen', 'title': 'Ramen'}]",4.0,['delivery'],$$,91711
+Gus's Barbecue,603,"[{'alias': 'bbq', 'title': 'Barbeque'}, {'alias': 'southern', 'title': 'Southern'}]",4.0,['delivery'],$$,91711
+Pong’s Ramen & Burger,22,"[{'alias': 'ramen', 'title': 'Ramen'}, {'alias': 'burgers', 'title': 'Burgers'}]",4.5,"['delivery', 'pickup']",,91711
+House of Pong Seafood & Grill,247,"[{'alias': 'seafood', 'title': 'Seafood'}, {'alias': 'asianfusion', 'title': 'Asian Fusion'}, {'alias': 'bars', 'title': 'Bars'}]",4.5,"['delivery', 'pickup']",$$,91711
+"Cafe X2O, Claremont",87,"[{'alias': 'mediterranean', 'title': 'Mediterranean'}, {'alias': 'vegetarian', 'title': 'Vegetarian'}, {'alias': 'salad', 'title': 'Salad'}]",4.5,[],$$,91711
+Izakaya Kisetsu,4,"[{'alias': 'asianfusion', 'title': 'Asian Fusion'}, {'alias': 'popuprestaurants', 'title': 'Pop-Up Restaurants'}]",5.0,[],,91711
+The Back Abbey,1901,"[{'alias': 'burgers', 'title': 'Burgers'}, {'alias': 'gastropubs', 'title': 'Gastropubs'}, {'alias': 'sandwiches', 'title': 'Sandwiches'}]",4.0,['delivery'],$$,91711
+Dog Haus Biergarten,183,"[{'alias': 'hotdog', 'title': 'Hot Dogs'}, {'alias': 'burgers', 'title': 'Burgers'}, {'alias': 'breweries', 'title': 'Breweries'}]",4.0,"['delivery', 'pickup']",$$,91711
+Broken Coconut,218,"[{'alias': 'ramen', 'title': 'Ramen'}, {'alias': 'tikibars', 'title': 'Tiki Bars'}, {'alias': 'hawaiian', 'title': 'Hawaiian'}]",4.0,[],$$,91711
+Candlelight Pavilion Dinner Theater,200,"[{'alias': 'dinnertheater', 'title': 'Dinner Theater'}]",4.5,[],$$$,91711
+Eddie's Italian Eatery,388,"[{'alias': 'pizza', 'title': 'Pizza'}, {'alias': 'italian', 'title': 'Italian'}]",4.0,"['delivery', 'pickup']",$$,91711
+Tutti Mangia Italian Grill,454,"[{'alias': 'italian', 'title': 'Italian'}, {'alias': 'steak', 'title': 'Steakhouses'}, {'alias': 'breakfast_brunch', 'title': 'Breakfast & Brunch'}]",4.0,['delivery'],$$$,91711
+Hi Family,237,"[{'alias': 'chinese', 'title': 'Chinese'}, {'alias': 'soup', 'title': 'Soup'}]",4.0,"['delivery', 'pickup']",$$,91711
+Mongolian Barbeque,275,"[{'alias': 'mongolian', 'title': 'Mongolian'}]",3.5,['delivery'],$$,91711
+Chang’s Asian Kitchen,58,"[{'alias': 'asianfusion', 'title': 'Asian Fusion'}, {'alias': 'chinese', 'title': 'Chinese'}, {'alias': 'korean', 'title': 'Korean'}]",4.5,"['delivery', 'pickup']",$$,91711
+Euro Cafe,555,"[{'alias': 'portuguese', 'title': 'Portuguese'}, {'alias': 'italian', 'title': 'Italian'}, {'alias': 'breakfast_brunch', 'title': 'Breakfast & Brunch'}]",4.0,['delivery'],$$,91711
+50-Fifty Asian Fusion Cuisine,281,"[{'alias': 'asianfusion', 'title': 'Asian Fusion'}]",4.0,"['delivery', 'pickup']",$$,91711
+Hi Family,237,"[{'alias': 'chinese', 'title': 'Chinese'}, {'alias': 'soup', 'title': 'Soup'}]",4.0,"['pickup', 'delivery']",$$,91711
+Mongolian Barbeque,275,"[{'alias': 'mongolian', 'title': 'Mongolian'}]",3.5,['delivery'],$$,91711
+Chang’s Asian Kitchen,58,"[{'alias': 'asianfusion', 'title': 'Asian Fusion'}, {'alias': 'chinese', 'title': 'Chinese'}, {'alias': 'korean', 'title': 'Korean'}]",4.5,"['pickup', 'delivery']",$$,91711
+Euro Cafe,555,"[{'alias': 'portuguese', 'title': 'Portuguese'}, {'alias': 'italian', 'title': 'Italian'}, {'alias': 'breakfast_brunch', 'title': 'Breakfast & Brunch'}]",4.0,['delivery'],$$,91711
+50-Fifty Asian Fusion Cuisine,281,"[{'alias': 'asianfusion', 'title': 'Asian Fusion'}]",4.0,"['pickup', 'delivery']",$$,91711
+The Upper House,196,"[{'alias': 'chinese', 'title': 'Chinese'}, {'alias': 'juicebars', 'title': 'Juice Bars & Smoothies'}, {'alias': 'bubbletea', 'title': 'Bubble Tea'}]",4.5,['delivery'],$$,91711
+Stacks,89,"[{'alias': 'sandwiches', 'title': 'Sandwiches'}, {'alias': 'beerbar', 'title': 'Beer Bar'}, {'alias': 'salad', 'title': 'Salad'}]",4.5,"['pickup', 'delivery']",,91711
+Bua Thai Cuisine,467,"[{'alias': 'thai', 'title': 'Thai'}]",3.5,['delivery'],$$,91711
+Kick Back Jack's,1173,"[{'alias': 'breakfast_brunch', 'title': 'Breakfast & Brunch'}, {'alias': 'tradamerican', 'title': 'American (Traditional)'}]",4.0,"['restaurant_reservation', 'delivery']",$$,91711
+Kazama Sushi,713,"[{'alias': 'sushi', 'title': 'Sushi Bars'}, {'alias': 'japanese', 'title': 'Japanese'}, {'alias': 'beerbar', 'title': 'Beer Bar'}]",4.0,['delivery'],$$,91711
+50-Fifty Asian Fusion Cuisine,281,"[{'alias': 'asianfusion', 'title': 'Asian Fusion'}]",4.0,"['pickup', 'delivery']",$$,91711
+The Upper House,196,"[{'alias': 'chinese', 'title': 'Chinese'}, {'alias': 'juicebars', 'title': 'Juice Bars & Smoothies'}, {'alias': 'bubbletea', 'title': 'Bubble Tea'}]",4.5,['delivery'],$$,91711
+Stacks,89,"[{'alias': 'sandwiches', 'title': 'Sandwiches'}, {'alias': 'beerbar', 'title': 'Beer Bar'}, {'alias': 'salad', 'title': 'Salad'}]",4.5,"['pickup', 'delivery']",,91711
+Bua Thai Cuisine,467,"[{'alias': 'thai', 'title': 'Thai'}]",3.5,['delivery'],$$,91711
+Kick Back Jack's,1173,"[{'alias': 'breakfast_brunch', 'title': 'Breakfast & Brunch'}, {'alias': 'tradamerican', 'title': 'American (Traditional)'}]",4.0,"['restaurant_reservation', 'delivery']",$$,91711
+Kazama Sushi,713,"[{'alias': 'sushi', 'title': 'Sushi Bars'}, {'alias': 'japanese', 'title': 'Japanese'}, {'alias': 'beerbar', 'title': 'Beer Bar'}]",4.0,['delivery'],$$,91711
+Heroes & Legends Restaurant,579,"[{'alias': 'burgers', 'title': 'Burgers'}, {'alias': 'beerbar', 'title': 'Beer Bar'}]",3.0,['delivery'],$$,91711
+Packing House Wines,186,"[{'alias': 'wine_bars', 'title': 'Wine Bars'}, {'alias': 'tradamerican', 'title': 'American (Traditional)'}, {'alias': 'tapasmallplates', 'title': 'Tapas/Small Plates'}]",4.0,['delivery'],$$,91711
+Oke Poke Claremont,249,"[{'alias': 'poke', 'title': 'Poke'}, {'alias': 'hawaiian', 'title': 'Hawaiian'}]",4.0,"['pickup', 'delivery']",$,91711
+The Upper House,196,"[{'alias': 'chinese', 'title': 'Chinese'}, {'alias': 'juicebars', 'title': 'Juice Bars & Smoothies'}, {'alias': 'bubbletea', 'title': 'Bubble Tea'}]",4.5,['delivery'],$$,91711
+Stacks,89,"[{'alias': 'sandwiches', 'title': 'Sandwiches'}, {'alias': 'beerbar', 'title': 'Beer Bar'}, {'alias': 'salad', 'title': 'Salad'}]",4.5,"['pickup', 'delivery']",,91711
+Bua Thai Cuisine,467,"[{'alias': 'thai', 'title': 'Thai'}]",3.5,['delivery'],$$,91711
+Kick Back Jack's,1173,"[{'alias': 'breakfast_brunch', 'title': 'Breakfast & Brunch'}, {'alias': 'tradamerican', 'title': 'American (Traditional)'}]",4.0,"['restaurant_reservation', 'delivery']",$$,91711
+Kazama Sushi,713,"[{'alias': 'sushi', 'title': 'Sushi Bars'}, {'alias': 'japanese', 'title': 'Japanese'}, {'alias': 'beerbar', 'title': 'Beer Bar'}]",4.0,['delivery'],$$,91711
+Heroes & Legends Restaurant,579,"[{'alias': 'burgers', 'title': 'Burgers'}, {'alias': 'beerbar', 'title': 'Beer Bar'}]",3.0,['delivery'],$$,91711
+Packing House Wines,186,"[{'alias': 'wine_bars', 'title': 'Wine Bars'}, {'alias': 'tradamerican', 'title': 'American (Traditional)'}, {'alias': 'tapasmallplates', 'title': 'Tapas/Small Plates'}]",4.0,['delivery'],$$,91711
+Oke Poke Claremont,249,"[{'alias': 'poke', 'title': 'Poke'}, {'alias': 'hawaiian', 'title': 'Hawaiian'}]",4.0,"['delivery', 'pickup']",$,91711
+The Claremont Village Eatery,38,"[{'alias': 'breakfast_brunch', 'title': 'Breakfast & Brunch'}]",5.0,[],$,91711
+Rincon Azteca Restaurant,78,"[{'alias': 'mexican', 'title': 'Mexican'}]",4.0,['delivery'],$,91711
+Hayato Sushi & Grill,241,"[{'alias': 'sushi', 'title': 'Sushi Bars'}, {'alias': 'japanese', 'title': 'Japanese'}, {'alias': 'seafood', 'title': 'Seafood'}]",4.0,[],$$,91711
+Pepo Melo,157,"[{'alias': 'acaibowls', 'title': 'Acai Bowls'}, {'alias': 'vegan', 'title': 'Vegan'}, {'alias': 'vegetarian', 'title': 'Vegetarian'}]",4.5,"['pickup', 'delivery']",$,91711
+The Press Restaurant,435,"[{'alias': 'tradamerican', 'title': 'American (Traditional)'}]",3.5,['delivery'],$$,91711
+Stacks,89,"[{'alias': 'sandwiches', 'title': 'Sandwiches'}, {'alias': 'beerbar', 'title': 'Beer Bar'}, {'alias': 'salad', 'title': 'Salad'}]",4.5,"['delivery', 'pickup']",,91711
+Bua Thai Cuisine,467,"[{'alias': 'thai', 'title': 'Thai'}]",3.5,['delivery'],$$,91711
+Kick Back Jack's,1173,"[{'alias': 'breakfast_brunch', 'title': 'Breakfast & Brunch'}, {'alias': 'tradamerican', 'title': 'American (Traditional)'}]",4.0,"['delivery', 'restaurant_reservation']",$$,91711
+Kazama Sushi,713,"[{'alias': 'sushi', 'title': 'Sushi Bars'}, {'alias': 'japanese', 'title': 'Japanese'}, {'alias': 'beerbar', 'title': 'Beer Bar'}]",4.0,['delivery'],$$,91711
+Heroes & Legends Restaurant,579,"[{'alias': 'burgers', 'title': 'Burgers'}, {'alias': 'beerbar', 'title': 'Beer Bar'}]",3.0,['delivery'],$$,91711
+Packing House Wines,186,"[{'alias': 'wine_bars', 'title': 'Wine Bars'}, {'alias': 'tradamerican', 'title': 'American (Traditional)'}, {'alias': 'tapasmallplates', 'title': 'Tapas/Small Plates'}]",4.0,['delivery'],$$,91711
+Oke Poke Claremont,249,"[{'alias': 'poke', 'title': 'Poke'}, {'alias': 'hawaiian', 'title': 'Hawaiian'}]",4.0,"['delivery', 'pickup']",$,91711
+The Claremont Village Eatery,38,"[{'alias': 'breakfast_brunch', 'title': 'Breakfast & Brunch'}]",5.0,[],$,91711
+Rincon Azteca Restaurant,78,"[{'alias': 'mexican', 'title': 'Mexican'}]",4.0,['delivery'],$,91711
+Hayato Sushi & Grill,241,"[{'alias': 'sushi', 'title': 'Sushi Bars'}, {'alias': 'japanese', 'title': 'Japanese'}, {'alias': 'seafood', 'title': 'Seafood'}]",4.0,[],$$,91711
+Pepo Melo,157,"[{'alias': 'acaibowls', 'title': 'Acai Bowls'}, {'alias': 'vegan', 'title': 'Vegan'}, {'alias': 'vegetarian', 'title': 'Vegetarian'}]",4.5,"['delivery', 'pickup']",$,91711
+The Press Restaurant,435,"[{'alias': 'tradamerican', 'title': 'American (Traditional)'}]",3.5,['delivery'],$$,91711
+Wolfe's Kitchen and Deli,17,"[{'alias': 'catering', 'title': 'Caterers'}, {'alias': 'delis', 'title': 'Delis'}, {'alias': 'gourmet', 'title': 'Specialty Food'}]",4.5,"['delivery', 'pickup']",,91711
+The Cajun Crab,144,"[{'alias': 'cajun', 'title': 'Cajun/Creole'}, {'alias': 'seafood', 'title': 'Seafood'}]",3.0,"['delivery', 'pickup']",$$,91711
+Corky's Kitchen and Bakery,183,"[{'alias': 'tradamerican', 'title': 'American (Traditional)'}, {'alias': 'bakeries', 'title': 'Bakeries'}, {'alias': 'breakfast_brunch', 'title': 'Breakfast & Brunch'}]",4.0,[],$$,91711
+Pollos Kikiryki,252,"[{'alias': 'peruvian', 'title': 'Peruvian'}]",3.5,['delivery'],$$,91711
+Heroes & Legends Restaurant,579,"[{'alias': 'burgers', 'title': 'Burgers'}, {'alias': 'beerbar', 'title': 'Beer Bar'}]",3.0,['delivery'],$$,91711
+Packing House Wines,186,"[{'alias': 'wine_bars', 'title': 'Wine Bars'}, {'alias': 'tradamerican', 'title': 'American (Traditional)'}, {'alias': 'tapasmallplates', 'title': 'Tapas/Small Plates'}]",4.0,['delivery'],$$,91711
+Oke Poke Claremont,249,"[{'alias': 'poke', 'title': 'Poke'}, {'alias': 'hawaiian', 'title': 'Hawaiian'}]",4.0,"['pickup', 'delivery']",$,91711
+The Claremont Village Eatery,38,"[{'alias': 'breakfast_brunch', 'title': 'Breakfast & Brunch'}]",5.0,[],$,91711
+Rincon Azteca Restaurant,78,"[{'alias': 'mexican', 'title': 'Mexican'}]",4.0,['delivery'],$,91711
+Hayato Sushi & Grill,241,"[{'alias': 'sushi', 'title': 'Sushi Bars'}, {'alias': 'japanese', 'title': 'Japanese'}, {'alias': 'seafood', 'title': 'Seafood'}]",4.0,[],$$,91711
+Pepo Melo,157,"[{'alias': 'acaibowls', 'title': 'Acai Bowls'}, {'alias': 'vegan', 'title': 'Vegan'}, {'alias': 'vegetarian', 'title': 'Vegetarian'}]",4.5,"['pickup', 'delivery']",$,91711
+The Press Restaurant,435,"[{'alias': 'tradamerican', 'title': 'American (Traditional)'}]",3.5,['delivery'],$$,91711
+Wolfe's Kitchen and Deli,17,"[{'alias': 'catering', 'title': 'Caterers'}, {'alias': 'delis', 'title': 'Delis'}, {'alias': 'gourmet', 'title': 'Specialty Food'}]",4.5,"['pickup', 'delivery']",,91711
+The Cajun Crab,144,"[{'alias': 'cajun', 'title': 'Cajun/Creole'}, {'alias': 'seafood', 'title': 'Seafood'}]",3.0,"['pickup', 'delivery']",$$,91711
+Corky's Kitchen and Bakery,183,"[{'alias': 'tradamerican', 'title': 'American (Traditional)'}, {'alias': 'bakeries', 'title': 'Bakeries'}, {'alias': 'breakfast_brunch', 'title': 'Breakfast & Brunch'}]",4.0,[],$$,91711
+Pollos Kikiryki,252,"[{'alias': 'peruvian', 'title': 'Peruvian'}]",3.5,['delivery'],$$,91711
+Boca Burger,293,"[{'alias': 'burgers', 'title': 'Burgers'}, {'alias': 'mediterranean', 'title': 'Mediterranean'}, {'alias': 'empanadas', 'title': 'Empanadas'}]",4.0,"['pickup', 'delivery']",$,91711
+The Dinner Detective,5,"[{'alias': 'dinnertheater', 'title': 'Dinner Theater'}]",4.0,[],,91711
+Oni Sushi,66,"[{'alias': 'sushi', 'title': 'Sushi Bars'}, {'alias': 'ramen', 'title': 'Ramen'}, {'alias': 'poke', 'title': 'Poke'}]",4.5,"['pickup', 'delivery']",$$,91711
+Darvish Restaurant,193,"[{'alias': 'persian', 'title': 'Persian/Iranian'}, {'alias': 'mideastern', 'title': 'Middle Eastern'}, {'alias': 'mediterranean', 'title': 'Mediterranean'}]",3.5,"['pickup', 'delivery']",$$,91711
+Hayato Sushi & Grill,241,"[{'alias': 'sushi', 'title': 'Sushi Bars'}, {'alias': 'japanese', 'title': 'Japanese'}, {'alias': 'seafood', 'title': 'Seafood'}]",4.0,[],$$,91711
+Pepo Melo,157,"[{'alias': 'acaibowls', 'title': 'Acai Bowls'}, {'alias': 'vegan', 'title': 'Vegan'}, {'alias': 'vegetarian', 'title': 'Vegetarian'}]",4.5,"['delivery', 'pickup']",$,91711
+The Press Restaurant,435,"[{'alias': 'tradamerican', 'title': 'American (Traditional)'}]",3.5,['delivery'],$$,91711
+Wolfe's Kitchen and Deli,17,"[{'alias': 'catering', 'title': 'Caterers'}, {'alias': 'delis', 'title': 'Delis'}, {'alias': 'gourmet', 'title': 'Specialty Food'}]",4.5,"['delivery', 'pickup']",,91711
+The Cajun Crab,144,"[{'alias': 'cajun', 'title': 'Cajun/Creole'}, {'alias': 'seafood', 'title': 'Seafood'}]",3.0,"['delivery', 'pickup']",$$,91711
+Corky's Kitchen and Bakery,183,"[{'alias': 'tradamerican', 'title': 'American (Traditional)'}, {'alias': 'bakeries', 'title': 'Bakeries'}, {'alias': 'breakfast_brunch', 'title': 'Breakfast & Brunch'}]",4.0,[],$$,91711
+Pollos Kikiryki,252,"[{'alias': 'peruvian', 'title': 'Peruvian'}]",3.5,['delivery'],$$,91711
+Boca Burger,293,"[{'alias': 'burgers', 'title': 'Burgers'}, {'alias': 'mediterranean', 'title': 'Mediterranean'}, {'alias': 'empanadas', 'title': 'Empanadas'}]",4.0,"['delivery', 'pickup']",$,91711
+The Dinner Detective,5,"[{'alias': 'dinnertheater', 'title': 'Dinner Theater'}]",4.0,[],,91711
+Oni Sushi,66,"[{'alias': 'sushi', 'title': 'Sushi Bars'}, {'alias': 'ramen', 'title': 'Ramen'}, {'alias': 'poke', 'title': 'Poke'}]",4.5,"['delivery', 'pickup']",$$,91711
+Darvish Restaurant,193,"[{'alias': 'persian', 'title': 'Persian/Iranian'}, {'alias': 'mideastern', 'title': 'Middle Eastern'}, {'alias': 'mediterranean', 'title': 'Mediterranean'}]",3.5,"['delivery', 'pickup']",$$,91711
+Pizza N Such,356,"[{'alias': 'pizza', 'title': 'Pizza'}, {'alias': 'italian', 'title': 'Italian'}]",3.5,['delivery'],$$,91711
+El Ranchero Mexican Food and Margaritas,317,"[{'alias': 'mexican', 'title': 'Mexican'}, {'alias': 'cocktailbars', 'title': 'Cocktail Bars'}]",3.5,['delivery'],$$,91711
+Patty's Mexican Foods,372,"[{'alias': 'mexican', 'title': 'Mexican'}]",4.0,['delivery'],$,91711
+Poke Dot,284,"[{'alias': 'seafood', 'title': 'Seafood'}, {'alias': 'hawaiian', 'title': 'Hawaiian'}, {'alias': 'poke', 'title': 'Poke'}]",4.0,['delivery'],$$,91711
+Corky's Kitchen and Bakery,183,"[{'alias': 'tradamerican', 'title': 'American (Traditional)'}, {'alias': 'bakeries', 'title': 'Bakeries'}, {'alias': 'breakfast_brunch', 'title': 'Breakfast & Brunch'}]",4.0,[],$$,91711
+Pollos Kikiryki,252,"[{'alias': 'peruvian', 'title': 'Peruvian'}]",3.5,['delivery'],$$,91711
+Boca Burger,293,"[{'alias': 'burgers', 'title': 'Burgers'}, {'alias': 'mediterranean', 'title': 'Mediterranean'}, {'alias': 'empanadas', 'title': 'Empanadas'}]",4.0,"['pickup', 'delivery']",$,91711
+The Dinner Detective,5,"[{'alias': 'dinnertheater', 'title': 'Dinner Theater'}]",4.0,[],,91711
+Oni Sushi,66,"[{'alias': 'sushi', 'title': 'Sushi Bars'}, {'alias': 'ramen', 'title': 'Ramen'}, {'alias': 'poke', 'title': 'Poke'}]",4.5,"['pickup', 'delivery']",$$,91711
+Darvish Restaurant,193,"[{'alias': 'persian', 'title': 'Persian/Iranian'}, {'alias': 'mideastern', 'title': 'Middle Eastern'}, {'alias': 'mediterranean', 'title': 'Mediterranean'}]",3.5,"['delivery', 'pickup']",$$,91711
+Pizza N Such,356,"[{'alias': 'pizza', 'title': 'Pizza'}, {'alias': 'italian', 'title': 'Italian'}]",3.5,['delivery'],$$,91711
+El Ranchero Mexican Food and Margaritas,317,"[{'alias': 'mexican', 'title': 'Mexican'}, {'alias': 'cocktailbars', 'title': 'Cocktail Bars'}]",3.5,['delivery'],$$,91711
+Patty's Mexican Foods,372,"[{'alias': 'mexican', 'title': 'Mexican'}]",4.0,['delivery'],$,91711
+Poke Dot,284,"[{'alias': 'seafood', 'title': 'Seafood'}, {'alias': 'hawaiian', 'title': 'Hawaiian'}, {'alias': 'poke', 'title': 'Poke'}]",4.0,['delivery'],$$,91711
+Blaze Fast Fire'd Pizza,377,"[{'alias': 'salad', 'title': 'Salad'}, {'alias': 'gluten_free', 'title': 'Gluten-Free'}, {'alias': 'pizza', 'title': 'Pizza'}]",4.0,[],$,91711
+Zaky Mediterranean Grill,213,"[{'alias': 'mediterranean', 'title': 'Mediterranean'}, {'alias': 'vegetarian', 'title': 'Vegetarian'}]",3.0,"['pickup', 'delivery']",$$,91711
+The Tamale Guy,164,"[{'alias': 'mexican', 'title': 'Mexican'}, {'alias': 'vegetarian', 'title': 'Vegetarian'}, {'alias': 'soup', 'title': 'Soup'}]",4.0,"['pickup', 'delivery']",$,91711
+Darvish Restaurant,193,"[{'alias': 'persian', 'title': 'Persian/Iranian'}, {'alias': 'mideastern', 'title': 'Middle Eastern'}, {'alias': 'mediterranean', 'title': 'Mediterranean'}]",3.5,"['pickup', 'delivery']",$$,91711
+Pizza N Such,356,"[{'alias': 'pizza', 'title': 'Pizza'}, {'alias': 'italian', 'title': 'Italian'}]",3.5,['delivery'],$$,91711
+El Ranchero Mexican Food and Margaritas,317,"[{'alias': 'mexican', 'title': 'Mexican'}, {'alias': 'cocktailbars', 'title': 'Cocktail Bars'}]",3.5,['delivery'],$$,91711
+Patty's Mexican Foods,372,"[{'alias': 'mexican', 'title': 'Mexican'}]",4.0,['delivery'],$,91711
+Poke Dot,284,"[{'alias': 'seafood', 'title': 'Seafood'}, {'alias': 'hawaiian', 'title': 'Hawaiian'}, {'alias': 'poke', 'title': 'Poke'}]",4.0,['delivery'],$$,91711
+Blaze Fast Fire'd Pizza,377,"[{'alias': 'salad', 'title': 'Salad'}, {'alias': 'gluten_free', 'title': 'Gluten-Free'}, {'alias': 'pizza', 'title': 'Pizza'}]",4.0,[],$,91711
+Zaky Mediterranean Grill,213,"[{'alias': 'mediterranean', 'title': 'Mediterranean'}, {'alias': 'vegetarian', 'title': 'Vegetarian'}]",3.0,"['pickup', 'delivery']",$$,91711
+The Tamale Guy,164,"[{'alias': 'mexican', 'title': 'Mexican'}, {'alias': 'vegetarian', 'title': 'Vegetarian'}, {'alias': 'soup', 'title': 'Soup'}]",4.0,"['pickup', 'delivery']",$,91711
+Walter's Restaurant,682,"[{'alias': 'breakfast_brunch', 'title': 'Breakfast & Brunch'}, {'alias': 'newamerican', 'title': 'American (New)'}, {'alias': 'steak', 'title': 'Steakhouses'}]",3.0,"['pickup', 'delivery']",$$,91711
+Round Table Pizza,65,"[{'alias': 'pizza', 'title': 'Pizza'}]",3.5,[],$$,91711
+El Ranchero Mexican Food and Margaritas,317,"[{'alias': 'mexican', 'title': 'Mexican'}, {'alias': 'cocktailbars', 'title': 'Cocktail Bars'}]",3.5,['delivery'],$$,91711
+Patty's Mexican Foods,372,"[{'alias': 'mexican', 'title': 'Mexican'}]",4.0,['delivery'],$,91711
+Poke Dot,284,"[{'alias': 'seafood', 'title': 'Seafood'}, {'alias': 'hawaiian', 'title': 'Hawaiian'}, {'alias': 'poke', 'title': 'Poke'}]",4.0,['delivery'],$$,91711
+Blaze Fast Fire'd Pizza,377,"[{'alias': 'salad', 'title': 'Salad'}, {'alias': 'gluten_free', 'title': 'Gluten-Free'}, {'alias': 'pizza', 'title': 'Pizza'}]",4.0,[],$,91711
+Zaky Mediterranean Grill,213,"[{'alias': 'mediterranean', 'title': 'Mediterranean'}, {'alias': 'vegetarian', 'title': 'Vegetarian'}]",3.0,"['pickup', 'delivery']",$$,91711
+The Tamale Guy,164,"[{'alias': 'mexican', 'title': 'Mexican'}, {'alias': 'vegetarian', 'title': 'Vegetarian'}, {'alias': 'soup', 'title': 'Soup'}]",4.0,"['pickup', 'delivery']",$,91711
+Walter's Restaurant,682,"[{'alias': 'breakfast_brunch', 'title': 'Breakfast & Brunch'}, {'alias': 'newamerican', 'title': 'American (New)'}, {'alias': 'steak', 'title': 'Steakhouses'}]",3.0,"['pickup', 'delivery']",$$,91711
+Round Table Pizza,65,"[{'alias': 'pizza', 'title': 'Pizza'}]",3.5,[],$$,91711
+Petiscos,317,"[{'alias': 'tacos', 'title': 'Tacos'}]",3.5,['delivery'],$$,91711
+Poke Dot,284,"[{'alias': 'seafood', 'title': 'Seafood'}, {'alias': 'hawaiian', 'title': 'Hawaiian'}, {'alias': 'poke', 'title': 'Poke'}]",4.0,['delivery'],$$,91711
+Blaze Fast Fire'd Pizza,377,"[{'alias': 'salad', 'title': 'Salad'}, {'alias': 'gluten_free', 'title': 'Gluten-Free'}, {'alias': 'pizza', 'title': 'Pizza'}]",4.0,[],$,91711
+Zaky Mediterranean Grill,213,"[{'alias': 'mediterranean', 'title': 'Mediterranean'}, {'alias': 'vegetarian', 'title': 'Vegetarian'}]",3.0,"['pickup', 'delivery']",$$,91711
+The Tamale Guy,164,"[{'alias': 'mexican', 'title': 'Mexican'}, {'alias': 'vegetarian', 'title': 'Vegetarian'}, {'alias': 'soup', 'title': 'Soup'}]",4.0,"['pickup', 'delivery']",$,91711
+Walter's Restaurant,682,"[{'alias': 'breakfast_brunch', 'title': 'Breakfast & Brunch'}, {'alias': 'newamerican', 'title': 'American (New)'}, {'alias': 'steak', 'title': 'Steakhouses'}]",3.0,"['pickup', 'delivery']",$$,91711
+Round Table Pizza,65,"[{'alias': 'pizza', 'title': 'Pizza'}]",3.5,[],$$,91711
+Petiscos,317,"[{'alias': 'tacos', 'title': 'Tacos'}]",3.5,['delivery'],$$,91711
+Zaky Mediterranean Grill,213,"[{'alias': 'mediterranean', 'title': 'Mediterranean'}, {'alias': 'vegetarian', 'title': 'Vegetarian'}]",3.0,"['pickup', 'delivery']",$$,91711
+The Tamale Guy,164,"[{'alias': 'mexican', 'title': 'Mexican'}, {'alias': 'vegetarian', 'title': 'Vegetarian'}, {'alias': 'soup', 'title': 'Soup'}]",4.0,"['pickup', 'delivery']",$,91711
+Walter's Restaurant,682,"[{'alias': 'breakfast_brunch', 'title': 'Breakfast & Brunch'}, {'alias': 'newamerican', 'title': 'American (New)'}, {'alias': 'steak', 'title': 'Steakhouses'}]",3.0,"['pickup', 'delivery']",$$,91711
+Round Table Pizza,65,"[{'alias': 'pizza', 'title': 'Pizza'}]",3.5,[],$$,91711
+Petiscos,317,"[{'alias': 'tacos', 'title': 'Tacos'}]",3.5,['delivery'],$$,91711
+Loving Hut Claremont,470,"[{'alias': 'vegan', 'title': 'Vegan'}, {'alias': 'gluten_free', 'title': 'Gluten-Free'}, {'alias': 'asianfusion', 'title': 'Asian Fusion'}]",3.5,"['pickup', 'delivery']",$$,91711
+Sushi Maru Seafood,234,"[{'alias': 'sushi', 'title': 'Sushi Bars'}, {'alias': 'seafood', 'title': 'Seafood'}]",3.5,"['pickup', 'delivery']",$$,91711
+The Tamale Guy,164,"[{'alias': 'mexican', 'title': 'Mexican'}, {'alias': 'vegetarian', 'title': 'Vegetarian'}, {'alias': 'soup', 'title': 'Soup'}]",4.0,"['delivery', 'pickup']",$,91711
+Walter's Restaurant,682,"[{'alias': 'breakfast_brunch', 'title': 'Breakfast & Brunch'}, {'alias': 'newamerican', 'title': 'American (New)'}, {'alias': 'steak', 'title': 'Steakhouses'}]",3.0,"['delivery', 'pickup']",$$,91711
+Round Table Pizza,65,"[{'alias': 'pizza', 'title': 'Pizza'}]",3.5,[],$$,91711
+Petiscos,317,"[{'alias': 'tacos', 'title': 'Tacos'}]",3.5,['delivery'],$$,91711
+Loving Hut Claremont,470,"[{'alias': 'vegan', 'title': 'Vegan'}, {'alias': 'gluten_free', 'title': 'Gluten-Free'}, {'alias': 'asianfusion', 'title': 'Asian Fusion'}]",3.5,"['delivery', 'pickup']",$$,91711
+Sushi Maru Seafood,234,"[{'alias': 'sushi', 'title': 'Sushi Bars'}, {'alias': 'seafood', 'title': 'Seafood'}]",3.5,"['delivery', 'pickup']",$$,91711
+Crepes de Paris,239,"[{'alias': 'creperies', 'title': 'Creperies'}]",3.5,['delivery'],$$,91711
+Walter's Restaurant,682,"[{'alias': 'breakfast_brunch', 'title': 'Breakfast & Brunch'}, {'alias': 'newamerican', 'title': 'American (New)'}, {'alias': 'steak', 'title': 'Steakhouses'}]",3.0,"['pickup', 'delivery']",$$,91711
+Round Table Pizza,65,"[{'alias': 'pizza', 'title': 'Pizza'}]",3.5,[],$$,91711
+Petiscos,317,"[{'alias': 'tacos', 'title': 'Tacos'}]",3.5,['delivery'],$$,91711
+Loving Hut Claremont,470,"[{'alias': 'vegan', 'title': 'Vegan'}, {'alias': 'gluten_free', 'title': 'Gluten-Free'}, {'alias': 'asianfusion', 'title': 'Asian Fusion'}]",3.5,"['pickup', 'delivery']",$$,91711
+Sushi Maru Seafood,234,"[{'alias': 'sushi', 'title': 'Sushi Bars'}, {'alias': 'seafood', 'title': 'Seafood'}]",3.5,"['pickup', 'delivery']",$$,91711
+Crepes de Paris,239,"[{'alias': 'creperies', 'title': 'Creperies'}]",3.5,['delivery'],$$,91711
+The Spot,802,"[{'alias': 'juicebars', 'title': 'Juice Bars & Smoothies'}, {'alias': 'sandwiches', 'title': 'Sandwiches'}, {'alias': 'coffee', 'title': 'Coffee & Tea'}]",3.5,"['pickup', 'delivery']",$,91711
+Round Table Pizza,65,"[{'alias': 'pizza', 'title': 'Pizza'}]",3.5,[],$$,91711
+Petiscos,317,"[{'alias': 'tacos', 'title': 'Tacos'}]",3.5,['delivery'],$$,91711
+Loving Hut Claremont,470,"[{'alias': 'vegan', 'title': 'Vegan'}, {'alias': 'gluten_free', 'title': 'Gluten-Free'}, {'alias': 'asianfusion', 'title': 'Asian Fusion'}]",3.5,"['delivery', 'pickup']",$$,91711
+Sushi Maru Seafood,234,"[{'alias': 'sushi', 'title': 'Sushi Bars'}, {'alias': 'seafood', 'title': 'Seafood'}]",3.5,"['delivery', 'pickup']",$$,91711
+Crepes de Paris,239,"[{'alias': 'creperies', 'title': 'Creperies'}]",3.5,['delivery'],$$,91711
+The Spot,802,"[{'alias': 'juicebars', 'title': 'Juice Bars & Smoothies'}, {'alias': 'sandwiches', 'title': 'Sandwiches'}, {'alias': 'coffee', 'title': 'Coffee & Tea'}]",3.5,"['delivery', 'pickup']",$,91711
+Saca's Mediterranean Cuisine,426,"[{'alias': 'greek', 'title': 'Greek'}, {'alias': 'mediterranean', 'title': 'Mediterranean'}, {'alias': 'sandwiches', 'title': 'Sandwiches'}]",4.0,[],$,91711
+Petiscos,317,"[{'alias': 'tacos', 'title': 'Tacos'}]",3.5,['delivery'],$$,91711
+Loving Hut Claremont,470,"[{'alias': 'vegan', 'title': 'Vegan'}, {'alias': 'gluten_free', 'title': 'Gluten-Free'}, {'alias': 'asianfusion', 'title': 'Asian Fusion'}]",3.5,"['pickup', 'delivery']",$$,91711
+Sushi Maru Seafood,234,"[{'alias': 'sushi', 'title': 'Sushi Bars'}, {'alias': 'seafood', 'title': 'Seafood'}]",3.5,"['pickup', 'delivery']",$$,91711
+Crepes de Paris,239,"[{'alias': 'creperies', 'title': 'Creperies'}]",3.5,['delivery'],$$,91711
+The Spot,802,"[{'alias': 'juicebars', 'title': 'Juice Bars & Smoothies'}, {'alias': 'sandwiches', 'title': 'Sandwiches'}, {'alias': 'coffee', 'title': 'Coffee & Tea'}]",3.5,"['delivery', 'pickup']",$,91711
+Saca's Mediterranean Cuisine,426,"[{'alias': 'greek', 'title': 'Greek'}, {'alias': 'mediterranean', 'title': 'Mediterranean'}, {'alias': 'sandwiches', 'title': 'Sandwiches'}]",4.0,[],$,91711
+Espiau's Restaurant,526,"[{'alias': 'mexican', 'title': 'Mexican'}, {'alias': 'bars', 'title': 'Bars'}, {'alias': 'tradamerican', 'title': 'American (Traditional)'}]",3.0,['delivery'],$$,91711
+Casa Moreno,490,"[{'alias': 'mexican', 'title': 'Mexican'}, {'alias': 'salad', 'title': 'Salad'}, {'alias': 'bars', 'title': 'Bars'}]",3.0,"['pickup', 'delivery']",$$,91711
+Loving Hut Claremont,470,"[{'alias': 'vegan', 'title': 'Vegan'}, {'alias': 'gluten_free', 'title': 'Gluten-Free'}, {'alias': 'asianfusion', 'title': 'Asian Fusion'}]",3.5,"['pickup', 'delivery']",$$,91711
+Sushi Maru Seafood,234,"[{'alias': 'sushi', 'title': 'Sushi Bars'}, {'alias': 'seafood', 'title': 'Seafood'}]",3.5,"['pickup', 'delivery']",$$,91711
+Crepes de Paris,239,"[{'alias': 'creperies', 'title': 'Creperies'}]",3.5,['delivery'],$$,91711
+The Spot,802,"[{'alias': 'juicebars', 'title': 'Juice Bars & Smoothies'}, {'alias': 'sandwiches', 'title': 'Sandwiches'}, {'alias': 'coffee', 'title': 'Coffee & Tea'}]",3.5,"['pickup', 'delivery']",$,91711
+Saca's Mediterranean Cuisine,426,"[{'alias': 'greek', 'title': 'Greek'}, {'alias': 'mediterranean', 'title': 'Mediterranean'}, {'alias': 'sandwiches', 'title': 'Sandwiches'}]",4.0,[],$,91711
+Espiau's Restaurant,526,"[{'alias': 'mexican', 'title': 'Mexican'}, {'alias': 'bars', 'title': 'Bars'}, {'alias': 'tradamerican', 'title': 'American (Traditional)'}]",3.0,['delivery'],$$,91711
+Casa Moreno,490,"[{'alias': 'mexican', 'title': 'Mexican'}, {'alias': 'salad', 'title': 'Salad'}, {'alias': 'bars', 'title': 'Bars'}]",3.0,"['pickup', 'delivery']",$$,91711
+Loving Hut Claremont,470,"[{'alias': 'vegan', 'title': 'Vegan'}, {'alias': 'gluten_free', 'title': 'Gluten-Free'}, {'alias': 'asianfusion', 'title': 'Asian Fusion'}]",3.5,"['delivery', 'pickup']",$$,91711
+Sushi Maru Seafood,234,"[{'alias': 'sushi', 'title': 'Sushi Bars'}, {'alias': 'seafood', 'title': 'Seafood'}]",3.5,"['delivery', 'pickup']",$$,91711
+Crepes de Paris,239,"[{'alias': 'creperies', 'title': 'Creperies'}]",3.5,['delivery'],$$,91711
+The Spot,802,"[{'alias': 'juicebars', 'title': 'Juice Bars & Smoothies'}, {'alias': 'sandwiches', 'title': 'Sandwiches'}, {'alias': 'coffee', 'title': 'Coffee & Tea'}]",3.5,"['delivery', 'pickup']",$,91711
+Saca's Mediterranean Cuisine,426,"[{'alias': 'greek', 'title': 'Greek'}, {'alias': 'mediterranean', 'title': 'Mediterranean'}, {'alias': 'sandwiches', 'title': 'Sandwiches'}]",4.0,[],$,91711
+Espiau's Restaurant,526,"[{'alias': 'mexican', 'title': 'Mexican'}, {'alias': 'bars', 'title': 'Bars'}, {'alias': 'tradamerican', 'title': 'American (Traditional)'}]",3.0,['delivery'],$$,91711
+Casa Moreno,490,"[{'alias': 'mexican', 'title': 'Mexican'}, {'alias': 'salad', 'title': 'Salad'}, {'alias': 'bars', 'title': 'Bars'}]",3.0,"['delivery', 'pickup']",$$,91711
+Star Wok,60,"[{'alias': 'chinese', 'title': 'Chinese'}]",3.5,['delivery'],$,91711
+Crepes de Paris,239,"[{'alias': 'creperies', 'title': 'Creperies'}]",3.5,['delivery'],$$,91711
+The Spot,802,"[{'alias': 'juicebars', 'title': 'Juice Bars & Smoothies'}, {'alias': 'sandwiches', 'title': 'Sandwiches'}, {'alias': 'coffee', 'title': 'Coffee & Tea'}]",3.5,"['pickup', 'delivery']",$,91711
+Saca's Mediterranean Cuisine,426,"[{'alias': 'greek', 'title': 'Greek'}, {'alias': 'mediterranean', 'title': 'Mediterranean'}, {'alias': 'sandwiches', 'title': 'Sandwiches'}]",4.0,[],$,91711
+Espiau's Restaurant,526,"[{'alias': 'mexican', 'title': 'Mexican'}, {'alias': 'bars', 'title': 'Bars'}, {'alias': 'tradamerican', 'title': 'American (Traditional)'}]",3.0,['delivery'],$$,91711
+Casa Moreno,490,"[{'alias': 'mexican', 'title': 'Mexican'}, {'alias': 'salad', 'title': 'Salad'}, {'alias': 'bars', 'title': 'Bars'}]",3.0,"['pickup', 'delivery']",$$,91711
+Star Wok,60,"[{'alias': 'chinese', 'title': 'Chinese'}]",3.5,['delivery'],$,91711
+We Olive & Wine Bar,2,"[{'alias': 'oliveoil', 'title': 'Olive Oil'}, {'alias': 'wine_bars', 'title': 'Wine Bars'}, {'alias': 'tapasmallplates', 'title': 'Tapas/Small Plates'}]",3.5,['delivery'],,91711
