@@ -5,3 +5,4 @@
 - [Yelp](https://www.yelp.com/fusion)
 - [Weather](https://openweathermap.org/current#zip)
 - [Potential Option for Crowd Movement](https://github.com/COVIDExposureIndices/COVIDExposureIndices?utm_source=wechat_session&utm_medium=social&utm_oi=667254872605331456#exposure-indices-derived-from-placeiq-movement-data)
+- [Google Mobility Report Extraction](https://github.com/kylemcdonald/covid-mobility-data)
