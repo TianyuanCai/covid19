@@ -6,11 +6,13 @@ import numpy as np
 import os
 
 restaurant_data_file = './data/raw/restaurants.csv'
+weather_data_file = './data/raw/weather.csv'
 
 
 def get_restaurant_data(zip_code):
     """
     Download restaurant data to folder, append if file aleady exists
+    https://www.yelp.com/fusion
 
     :param zip_code: str, Example '94118'
     :return:
@@ -41,3 +43,24 @@ def get_restaurant_data(zip_code):
         df.to_csv(restaurant_data_file, index=False, header=False, mode='a')
     else:
         df.to_csv(restaurant_data_file, index=False)
+
+
+def get_weather_data(zip_code):
+    """
+    Download weather data to folder, append if file aleady exists
+    https://developer.weathersource.com/tools/postman-collection-onpoint-api/
+    covid19 Research access
+
+    :param zip_code: str, Example '94118'
+    :return:
+    """
+    api_key = '84663a2b5a93171ddb2a'
+    url = f'https://api.weathersource.com/v1/{api_key}/postal_codes/{zip_code},' \
+          f'us/history.json?period=day&timestamp_eq=2018-01-02'
+    r = requests.get(url)
+    df = pd.json_normalize(json.loads(r.text))
+
+    if os.path.exists(weather_data_file):
+        df.to_csv(weather_data_file, index=False, header=False, mode='a')
+    else:
+        df.to_csv(weather_data_file, index=False)
