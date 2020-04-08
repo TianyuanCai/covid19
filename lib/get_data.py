@@ -1,9 +1,10 @@
 import json
 import requests
+import os
 
 import pandas as pd
 import numpy as np
-import os
+from tqdm import tqdm
 
 restaurant_data_file = './data/raw/restaurants.csv'
 weather_data_file = './data/raw/weather.csv'
@@ -20,11 +21,11 @@ def get_restaurant_data(zip_code):
     n_record = np.inf
     record_obtained = 0
     limit = 50  # max is 50
-    df = pd.DataFrame()
+    restaurant_df = pd.DataFrame()
 
     while n_record - record_obtained > 0:
         url = f'https://api.yelp.com/v3/businesses/search?term=restaurant&location={zip_code}&limit={limit}&offset=' \
-              f'{len(df)}'
+              f'{len(restaurant_df)}'
         r = requests.get(url, headers={
             "Authorization": "Bearer C4f1EztmmT5nYgEqH6B4XxqIwP8Hv2xwaiXbnodamVTQ7XfnLcFBNm7pi"
                              "-2hpXagZjojbD_yyL8kPW4xqAe"
@@ -33,11 +34,15 @@ def get_restaurant_data(zip_code):
         tmp_df = pd.json_normalize(json.loads(r.text)['businesses'])
         record_obtained += len(tmp_df)
 
-        tmp_df = tmp_df[(tmp_df['location.zip_code'] == zip_code) & (tmp_df['is_closed'].astype(int) == 0)]
-        tmp_df = tmp_df[['name', 'review_count', 'categories', 'rating', 'transactions', 'price', 'location.zip_code']]
+        if len(tmp_df) > 0:
+            tmp_df = tmp_df[(tmp_df['location.zip_code'] == zip_code) & (tmp_df['is_closed'].astype(int) == 0)]
+            tmp_df = tmp_df[
+                ['name', 'review_count', 'categories', 'rating', 'transactions', 'price', 'location.zip_code']]
 
-        restaurant_df = restaurant_df.append(tmp_df)
-        n_record = min(n_record, json.loads(r.text)['total'])
+            restaurant_df = restaurant_df.append(tmp_df)
+            n_record = min(n_record, json.loads(r.text)['total'])
+        else:
+            n_record = 0
 
     if os.path.exists(restaurant_data_file):
         restaurant_df.to_csv(restaurant_data_file, index=False, header=False, mode='a')
@@ -68,16 +73,27 @@ def get_weather_data(zip_code, date):
 
 
 if __name__ == '__main__':
-    nyt_df = pd.read_csv('data/nytimes_covid19_data/20200330_us-counties.csv')
+    nyt_df = pd.read_csv('data/nytimes_covid19_data/20200405_us-counties.csv')  # always use the latest nyt source
 
-    zip_df = pd.read_csv('data/raw/uszips.csv')  # https://simplemaps.com/data/us-zips
+    zip_df = pd.read_csv('data/raw/uszips.csv')
     zip_df['zip'] = zip_df['zip'].astype(str).str.pad(width=5, side='left', fillchar='0')
 
+    all_zips = set(zip_df['zip'])
+    all_dates = set(nyt_df['date'])
+
+    if os.path.exists(restaurant_data_file):
+        restaurant_df = pd.read_csv(restaurant_data_file)
+        restaurant_zips = set(restaurant_df['location.zip_code'].astype(str))
+    if os.path.exists(weather_data_file):
+        weather_df = pd.read_csv(weather_data_file)
+
+    remaining_zips = all_zips - restaurant_zips
+
     # download restaurant and weather data to raw folder
-    for z in set(zip_df['zip']):
+    for z in tqdm(remaining_zips):
         get_restaurant_data(z)
 
-        for d in set(nyt_df['date']):
+        for d in all_dates:
             get_weather_data(z, d)
 
     # todo merge to nyt data after aggregating by zip codes
