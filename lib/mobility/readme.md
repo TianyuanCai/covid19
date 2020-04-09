@@ -1,5 +1,7 @@
 # COVID-19 Mobility .pdf to .tsv
 
+**Original repo: https://github.com/kylemcdonald/covid-mobility-data**
+
 ### [Download the .tsv data](https://github.com/kylemcdonald/covid-mobility-data/releases/download/2020-03-29/2020-03-29-covid-mobility-data.zip).
 
 This script attempts to digitize the [COVID-19 Mobility Reports](https://www.google.com/covid19/mobility/) produced by Google.
