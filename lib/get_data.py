@@ -9,10 +9,10 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 
-restaurant_data_file = '../data/raw/restaurants.csv'
-weather_data_file = '../data/raw/weather.csv'
-nyt_data_file = '../data/nytimes_covid19_data/20200405_us-counties.csv'
-processed_data_file = '../data/processed/time_series.csv'
+restaurant_data_file = './data/raw/restaurants.csv'
+weather_data_file = './data/raw/weather.csv'
+nyt_data_file = './data/nytimes_covid19_data/20200405_us-counties.csv'
+processed_data_file = './data/processed/time_series.csv'
 
 today = datetime.datetime.today().strftime('%Y-%m-%d')
 
