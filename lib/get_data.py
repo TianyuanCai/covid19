@@ -11,6 +11,9 @@ from tqdm import tqdm
 
 restaurant_data_file = '../data/raw/restaurants.csv'
 weather_data_file = '../data/raw/weather.csv'
+nyt_data_file = '../data/nytimes_covid19_data/20200405_us-counties.csv'
+processed_data_file = '../data/processed/time_series.csv'
+
 today = datetime.datetime.today().strftime('%Y-%m-%d')
 
 
@@ -57,19 +60,20 @@ def get_restaurant_data(zip_code):
         restaurant_df.to_csv(restaurant_data_file, index=False)
 
 
-def get_weather_data(zip_code, date, start_date='2020-01-01'):
+def get_weather_data(zip_code, end_date, start_date='2020-01-01'):
     """
     Download weather data to folder, append if file aleady exists
     https://developer.weathersource.com/tools/postman-collection-onpoint-api/
     covid19 Research access
 
+    :param start_date:
     :param zip_code: str, Example '94118'
-    :param date: str, Example '2020-02-01'
+    :param end_date: str, Example '2020-02-01'
     :return:
     """
     api_key = '84663a2b5a93171ddb2a'
     url = f'https://api.weathersource.com/v1/{api_key}/postal_codes/{zip_code},' \
-          f'us/history.json?period=day&timestamp_between={start_date},{date}'
+          f'us/history.json?period=day&timestamp_between={start_date},{end_date}'
     r = requests.get(url)
     weather_df = pd.json_normalize(json.loads(r.text))
 
@@ -80,31 +84,71 @@ def get_weather_data(zip_code, date, start_date='2020-01-01'):
     time.sleep(5)
 
 
-if __name__ == '__main__':
-    nyt_df = pd.read_csv('../data/nytimes_covid19_data/20200405_us-counties.csv')  # always use the latest nyt source
-    nyt_df['fips'] = nyt_df['fips'].dropna().astype(int).astype(str)  # todo there are nan here
-
-    zip_df = pd.read_csv('../data/raw/uszips.csv')
+def get_zip_mapping():
+    zip_df = pd.read_csv('./data/raw/uszips.csv')
     zip_df['zip'] = zip_df['zip'].astype(str).str.pad(width=5, side='left', fillchar='0')
     zip_df['county_fips_all'] = zip_df['county_fips_all'].str.split('|')
     zip_df = zip_df.explode('county_fips_all')  # convert row to fip level before re-aggregate
     zip_df = zip_df[['county_fips_all', 'zip']]
+    return zip_df
+
+
+def aggregate_data():
+    restaurant_df = pd.read_csv(restaurant_data_file)
+    restaurant_df['location.zip_code'] = restaurant_df['location.zip_code'].astype(str).str.pad(width=5, side='left',
+                                                                                                fillchar='0')
+
+    weather_df = pd.read_csv(weather_data_file)
+    weather_df['postal_code'] = weather_df['postal_code'].astype(str).str.pad(width=5, side='left', fillchar='0')
+
+    nyt_df = pd.read_csv(nyt_data_file)  # always use the latest nyt source
+    nyt_df['fips'] = nyt_df['fips'].dropna().astype(int).astype(str)  # todo there are nan here
+
+    zip_df = get_zip_mapping()
+
+    # restaurant
+    # todo: nice to haves: feature eng from categories: count of bars, cafes, etc.
+    restaurant_df['transactions'] = restaurant_df['transactions'].apply(lambda x: '|'.join(list(ast.literal_eval(x))))
+    restaurant_dummies = pd.concat([pd.get_dummies(restaurant_df['price'], drop_first=True, prefix='price'),
+                                    pd.get_dummies(restaurant_df['transactions'], drop_first=True,
+                                                   prefix='transactions'),
+                                    restaurant_df['location.zip_code']], axis=1)
+    restaurant_dummies = restaurant_dummies.groupby('location.zip_code').sum().reset_index().add_prefix('sum_')
+    restaurant_mean = restaurant_df.groupby('location.zip_code')[
+        ['review_count', 'rating']].mean().reset_index().add_prefix('mean_')
+
+    restaurant_df = pd.merge(restaurant_mean, restaurant_dummies, left_on='mean_location.zip_code',
+                             right_on='sum_location.zip_code', validate='1:1')
+    restaurant_df = pd.merge(restaurant_df, zip_df, left_on='sum_location.zip_code', right_on='zip', how='left')
+    restaurant_df = restaurant_df.groupby('county_fips_all').mean().reset_index()  # restaurant data on zip level
+    restaurant_df = restaurant_df.drop(restaurant_df.filter(regex='zip', axis=1).columns)
+
+    # weather
+    weather_df['timestamp'] = weather_df['timestamp'].str.slice(stop=10)
+    weather_df = pd.merge(weather_df, zip_df, left_on='postal_code', right_on='zip', how='left')
+    weather_df = weather_df.groupby(['county_fips_all', 'timestamp']).mean().reset_index()
+    weather_df = weather_df.drop(weather_df.filter(regex='zip', axis=1).columns)
+
+    # join data
+    df = pd.merge(nyt_df, weather_df, left_on=['fips', 'date'], right_on=['county_fips_all', 'timestamp'], how='inner')
+    df = pd.merge(df, restaurant_df, left_on='fips', right_on='county_fips_all', how='inner')
+
+    return df
+
+
+if __name__ == '__main__':
+    zip_df = get_zip_mapping()
     all_zips = set(zip_df['zip'])
-
-    zip_df = pd.DataFrame(zip_df.groupby('county_fips_all')['zip'].apply(list)).reset_index()
-
-    all_dates = set(nyt_df['date'])
 
     if os.path.exists(restaurant_data_file):
         restaurant_df = pd.read_csv(restaurant_data_file)
-        restaurant_zips = set(restaurant_df['location.zip_code'].astype(str))
+        existing_zips = set(restaurant_df['location.zip_code'].astype(str))
     else:
-        restaurant_zips = set([])
-    if os.path.exists(weather_data_file):
-        weather_df = pd.read_csv(weather_data_file)
+        existing_zips = set([])
 
-    # prioritize zipcodes in major cities
-    remaining_zips = all_zips - restaurant_zips
+    remaining_zips = all_zips - existing_zips
+
+    # prioritize zip of major cities
     # remaining_zips = [k for k in remaining_zips if
     #                   '021' in k[:3] or '001' in k[:3] or '900' in k[:3] or '941' in k[:3] or '981' in k[:3]]
 
@@ -113,4 +157,5 @@ if __name__ == '__main__':
         get_restaurant_data(z)
         get_weather_data(z, today)
 
-
+    df = aggregate_data()
+    df.to_csv(processed_data_file)
