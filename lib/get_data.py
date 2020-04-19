@@ -9,8 +9,8 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 
-restaurant_data_file = './data/raw/restaurants.csv'
-weather_data_file = './data/raw/weather.csv'
+restaurant_data_file = '../data/raw/restaurants.csv'
+weather_data_file = '../data/raw/weather.csv'
 today = datetime.datetime.today().strftime('%Y-%m-%d')
 
 
@@ -77,21 +77,22 @@ def get_weather_data(zip_code, date, start_date='2020-01-01'):
         weather_df.to_csv(weather_data_file, index=False, header=False, mode='a')
     else:
         weather_df.to_csv(weather_data_file, index=False)
-    time.sleep(3)
+    time.sleep(5)
 
 
 if __name__ == '__main__':
-    nyt_df = pd.read_csv('./data/nytimes_covid19_data/20200405_us-counties.csv')  # always use the latest nyt source
+    nyt_df = pd.read_csv('../data/nytimes_covid19_data/20200405_us-counties.csv')  # always use the latest nyt source
     nyt_df['fips'] = nyt_df['fips'].dropna().astype(int).astype(str)  # todo there are nan here
 
-    zip_df = pd.read_csv('./data/raw/uszips.csv')
+    zip_df = pd.read_csv('../data/raw/uszips.csv')
     zip_df['zip'] = zip_df['zip'].astype(str).str.pad(width=5, side='left', fillchar='0')
     zip_df['county_fips_all'] = zip_df['county_fips_all'].str.split('|')
     zip_df = zip_df.explode('county_fips_all')  # convert row to fip level before re-aggregate
     zip_df = zip_df[['county_fips_all', 'zip']]
+    all_zips = set(zip_df['zip'])
+
     zip_df = pd.DataFrame(zip_df.groupby('county_fips_all')['zip'].apply(list)).reset_index()
 
-    all_zips = set(zip_df['zip'])
     all_dates = set(nyt_df['date'])
 
     if os.path.exists(restaurant_data_file):
@@ -104,28 +105,12 @@ if __name__ == '__main__':
 
     # prioritize zipcodes in major cities
     remaining_zips = all_zips - restaurant_zips
-    remaining_zips = [k for k in remaining_zips if
-                      '021' in k[:3] or '001' in k[:3] or '900' in k[:3] or '941' in k[:3] or '981' in k[:3]]
+    # remaining_zips = [k for k in remaining_zips if
+    #                   '021' in k[:3] or '001' in k[:3] or '900' in k[:3] or '941' in k[:3] or '981' in k[:3]]
 
     # download restaurant and weather data to raw folder
     for z in tqdm(remaining_zips):
         get_restaurant_data(z)
         get_weather_data(z, today)
 
-    # restaurant planning
-    restaurant_df['transactions'] = restaurant_df['transactions'].apply(lambda x: '|'.join(list(ast.literal_eval(x))))
-    restaurant_dummies = pd.concat([pd.get_dummies(restaurant_df['price'], drop_first=True, prefix='price'),
-                                    pd.get_dummies(restaurant_df['transactions'], drop_first=True,
-                                                   prefix='transactions')], axis=1)
-    restaurant_mean = restaurant_df.groupby('location.zip_code')['review_count', 'rating'].mean().reset_index()
-    restaurant_df = pd.concat([restaurant_mean, restaurant_dummies], axis=1)
-    # feature eng from categories: count of bars, etc.
 
-    # weather join by datetime and weather_df['timestamp']
-    weather_df['timestamp'] = weather_df['timestamp'].str.slice(stop=10)
-    # aggregate weather?
-
-    # append all zip index to nyt data frame
-    df = nyt_df.merge(zip_df, how='left', left_on='fips', right_on='county_fips_all')
-
-    # join data
