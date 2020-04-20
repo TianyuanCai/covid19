@@ -6,6 +6,10 @@
 
 ### [Weather](https://developer.weathersource.com/tools/postman-collection-onpoint-api/)
 
+There is a large number of columns here. It would be good to regularize the data set and identify the most important columns before writing up the variable description. The full set of variable descriptions are here. 
+
+[Variable description](https://developer.weathersource.com/documentation/resources/get-points-onpoint_id-history/)
+
 ### [Potential Option for Crowd Movement](https://github.com/COVIDExposureIndices/COVIDExposureIndices?utm_source=wechat_session&utm_medium=social&utm_oi=667254872605331456#exposure-indices-derived-from-placeiq-movement-data)
 
 ### [Google Mobility Report Extraction](https://github.com/kylemcdonald/covid-mobility-data)
