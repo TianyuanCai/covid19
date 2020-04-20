@@ -81,7 +81,6 @@ def get_weather_data(zip_code, end_date, start_date='2020-01-01'):
         weather_df.to_csv(weather_data_file, index=False, header=False, mode='a')
     else:
         weather_df.to_csv(weather_data_file, index=False)
-    time.sleep(5)
 
 
 def get_zip_mapping():
@@ -140,22 +139,32 @@ if __name__ == '__main__':
     zip_df = get_zip_mapping()
     all_zips = set(zip_df['zip'])
 
-    if os.path.exists(restaurant_data_file):
-        restaurant_df = pd.read_csv(restaurant_data_file)
-        existing_zips = set(restaurant_df['location.zip_code'].astype(str))
+    if os.path.exists(weather_data_file):
+        weather_df = pd.read_csv(weather_data_file)
+        existing_zips = set(weather_df['postal_code'].astype(str))
     else:
         existing_zips = set([])
 
-    remaining_zips = all_zips - existing_zips
+    # remaining_zips = all_zips - existing_zips
 
-    # prioritize zip of major cities
-    # remaining_zips = [k for k in remaining_zips if
-    #                   '021' in k[:3] or '001' in k[:3] or '900' in k[:3] or '941' in k[:3] or '981' in k[:3]]
+    nyt_df = pd.read_csv(nyt_data_file)
+    nyt_df['fips'] = nyt_df['fips'].dropna().astype(int).astype(str)
+    zip2fip = zip_df.groupby('county_fips_all').first().reset_index()  # get weather by first zip in fip
 
     # download restaurant and weather data to raw folder
-    for z in tqdm(remaining_zips):
-        get_restaurant_data(z)
+    last_len = 1000
+    for z in tqdm(zip2fip['zip']):
+        # get_restaurant_data(z)
         get_weather_data(z, today)
+
+        weather_df = pd.read_csv(weather_data_file)
+        existing_zips = set(weather_df['postal_code'].astype(str))
+        remaining_zips = set(zip2fip['zip']) - existing_zips
+        if len(remaining_zips) - last_len == 0:  # check if hitting limits
+            time.sleep(20)
+        else:
+            time.sleep(5)
+        last_len = len(remaining_zips)
 
     df = aggregate_data()
     df.to_csv(processed_data_file)
