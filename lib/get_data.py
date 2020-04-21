@@ -150,21 +150,22 @@ if __name__ == '__main__':
     nyt_df = pd.read_csv(nyt_data_file)
     nyt_df['fips'] = nyt_df['fips'].dropna().astype(int).astype(str)
     zip2fip = zip_df.groupby('county_fips_all').first().reset_index()  # get weather by first zip in fip
+    remaining_zips = set(zip2fip['zip']) - existing_zips
 
     # download restaurant and weather data to raw folder
     last_len = 1000
-    for z in tqdm(zip2fip['zip']):
+    for z in tqdm(remaining_zips):
         # get_restaurant_data(z)
         get_weather_data(z, today)
 
         weather_df = pd.read_csv(weather_data_file)
         existing_zips = set(weather_df['postal_code'].astype(str))
-        remaining_zips = set(zip2fip['zip']) - existing_zips
-        if len(remaining_zips) - last_len == 0:  # check if hitting limits
-            time.sleep(20)
+
+        if len(existing_zips) - last_len == 0:  # check if hitting limits
+            time.sleep(60)
         else:
             time.sleep(5)
-        last_len = len(remaining_zips)
+        last_len = len(existing_zips)
 
     df = aggregate_data()
     df.to_csv(processed_data_file)
