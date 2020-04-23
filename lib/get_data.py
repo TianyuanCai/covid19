@@ -75,7 +75,10 @@ def get_weather_data(zip_code, end_date, start_date='2020-01-01'):
     url = f'https://api.weathersource.com/v1/{api_key}/postal_codes/{zip_code},' \
           f'us/history.json?period=day&timestamp_between={start_date},{end_date}'
     r = requests.get(url)
-    weather_df = pd.json_normalize(json.loads(r.text))
+    try:
+        weather_df = pd.json_normalize(json.loads(r.text))
+    except json.decoder.JSONDecodeError:
+        return
 
     if os.path.exists(weather_data_file):
         weather_df.to_csv(weather_data_file, index=False, header=False, mode='a')
@@ -145,6 +148,8 @@ if __name__ == '__main__':
     else:
         existing_zips = set([])
 
+    # weather_df.to_hdf('./data/raw/weather.h5', key=)
+
     # remaining_zips = all_zips - existing_zips
 
     nyt_df = pd.read_csv(nyt_data_file)
@@ -168,4 +173,5 @@ if __name__ == '__main__':
         last_len = len(existing_zips)
 
     df = aggregate_data()
+    # len(df[['date', 'county', 'county_fips_all', 'timestamp']].drop_duplicates()) - len(df)
     df.to_csv(processed_data_file)
