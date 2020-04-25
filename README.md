@@ -20,7 +20,7 @@ Currently Google provides the raw data, but the data is weeks behind the NYT COV
 ### [Census Income Data](https://www.census.gov/data/tables/2019/demo/income-poverty/p60-266.html)
 Income data by county has been merged to the time series data. Check the column "income_2018" in `time_series_all.csv`.
 
-### [Population]
+### [Population](https://www.census.gov/data/datasets/time-series/demo/popest/2010s-state-total.html#par_textimage_1873399417)
 Population for 2018 (infered) data has been merged to the time series data. Check the "pop_2018" in `time_series_all.csv`.
 
 ### [Yelp](https://www.yelp.com/fusion)
