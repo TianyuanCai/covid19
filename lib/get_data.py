@@ -5,6 +5,7 @@ import time
 import datetime
 import ast
 
+import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
@@ -95,12 +96,12 @@ def get_zip_mapping():
     return zip_df
 
 
-def aggregate_data():
-    weather_df = pd.read_csv(weather_data_file)
+def aggregate_data(weather_file=weather_data_file, nyt_file=nyt_data_file):
+    weather_df = pd.read_csv(weather_file)
     weather_df['postal_code'] = weather_df['postal_code'].astype(str).str.pad(width=5, side='left', fillchar='0')
 
-    nyt_df = pd.read_csv(nyt_data_file)  # always use the latest nyt source
-    nyt_df['fips'] = nyt_df['fips'].dropna().astype(int).astype(str)  # todo there are nan here
+    nyt_df = pd.read_csv(nyt_data_file).dropna()
+    nyt_df['fips'] = nyt_df['fips'].astype(int).astype(str).str.pad(width=5, side='left', fillchar='0')
 
     zip_df = get_zip_mapping()
 
@@ -111,12 +112,40 @@ def aggregate_data():
     weather_df = weather_df.drop(weather_df.filter(regex='zip', axis=1).columns)
 
     # join data
-    df = pd.merge(nyt_df, weather_df, left_on=['fips', 'date'], right_on=['county_fips_all', 'timestamp'], how='inner')
-    # df = pd.merge(df, restaurant_df, left_on='fips', right_on='county_fips_all', how='inner')
+    agg_df = pd.merge(nyt_df, weather_df, left_on=['fips', 'date'], right_on=['county_fips_all', 'timestamp'],
+                      how='inner')
+    agg_df = agg_df.drop(['county_fips_all', 'timestamp'], axis=1)
 
-    return df
+    return agg_df
 
 
+def get_model_data(date_range=(0, 14), pred_day=21):
+    df = pd.read_csv(processed_data_file)
+
+    # ensure full coverage of interested dates
+    df = df[df['fips'].isin(df[df['days_since_10_cases'] == pred_day]['fips'].drop_duplicates())]
+
+    # filter for training and testing dates
+    df_x = df[df['days_since_10_cases'].between(date_range[0], date_range[1])]
+    df_x = df_x.groupby(['state', 'county', 'fips']).mean().reset_index()
+    df_x = df_x.drop(['days_since_10_cases'], axis=1)
+
+    # get change rate since last training date
+    df_y = df[df['days_since_10_cases'].isin([date_range[1] + 1, pred_day])][
+        ['fips', 'cases', 'deaths', 'days_since_10_cases']]
+    df_y = df_y.sort_values(['fips', 'days_since_10_cases']).reset_index(drop=True)
+    day_idx = np.where(df_y['days_since_10_cases'] == pred_day)[0]
+    df_y_delta = df_y.iloc[day_idx, :].reset_index().subtract(df_y.iloc[day_idx - 1, :].reset_index())
+    df_y_delta = df_y_delta.drop(['index', 'days_since_10_cases'], axis=1)
+    df_y_delta['fips'] = df_y.loc[day_idx, 'fips'].reset_index(drop=True)
+    df_y_delta = df_y_delta.add_prefix(f'day_{pred_day}_delta_')
+    df_x = df_x.merge(df_y_delta, left_on='fips', right_on=f'day_{pred_day}_delta_fips', how='inner')
+
+    return df_x
+
+
+# for i in [(7, 14), (14, 21), (14, 16)]:
+#     print(len(get_model_data(date_range=(0, i[0]), pred_day=i[1])))
 
 
 if __name__ == '__main__':
@@ -148,5 +177,17 @@ if __name__ == '__main__':
             time.sleep(5)
         last_len = len(existing_zips)
 
-    df = aggregate_data()
-    df.to_csv(processed_data_file)
+    df = aggregate_data(weather_file=weather_data_file, nyt_file=nyt_data_file)
+
+    # calculate relative dates to the first day with 10 cases
+    first_date_df = nyt_df[nyt_df['cases'] >= 10].sort_values(['county', 'date']).groupby('fips')[
+        'date'].first().reset_index()
+    first_date_df['fips'] = first_date_df['fips'].astype(int).astype(str).str.pad(width=5, side='left', fillchar='0')
+    first_date_df.columns = ['fips', 'first_date']
+    df = df.merge(first_date_df, on='fips', how='inner')
+    df['first_date'] = pd.to_datetime(df['first_date'])
+    df['date'] = pd.to_datetime(df['date'])
+    df['days_since_10_cases'] = (df['date'] - df['first_date']).dt.days
+    df = df.drop(['date', 'first_date'], axis=1)
+
+    df.to_csv(processed_data_file, index=False)
