@@ -14,7 +14,7 @@ from tqdm import tqdm
 restaurant_data_file = './data/raw/restaurants.csv'
 weather_data_file = './data/raw/weather.csv'
 nyt_data_file = './data/nytimes_covid19_data/20200423_us-counties.csv'
-processed_data_file = './data/processed/time_series_test.csv'
+processed_data_file = './data/processed/time_series.csv'
 
 today = datetime.datetime.today().strftime('%Y-%m-%d')
 
@@ -215,7 +215,7 @@ def aggregate_data(weather_file=weather_data_file, nyt_file=nyt_data_file,
     agg_df = pd.merge(nyt_df, weather_df, left_on=['fips', 'date'], right_on=['county_fips_all', 'timestamp'],
                       how='inner')
     agg_df = agg_df.drop(['county_fips_all', 'timestamp'], axis=1)
-    print(agg_df.shape)
+
     mobility = pd.read_csv(mobility_file)
     agg_df = update_mobility(agg_df, mobility)
     
