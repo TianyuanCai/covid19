@@ -267,19 +267,19 @@ if __name__ == '__main__':
     zip2fip = zip_df.groupby('county_fips_all').first().reset_index()  # get weather by first zip in fip
     remaining_zips = set(zip2fip['zip']) - existing_zips
 
-#     # download restaurant and weather data to raw folder
-#     last_len = 0
-#     for z in tqdm(remaining_zips):
-#         get_weather_data(z, today)
+    # download restaurant and weather data to raw folder
+    last_len = 0
+    for z in tqdm(remaining_zips):
+        get_weather_data(z, today)
 
-#         weather_df = pd.read_csv(weather_data_file)
-#         existing_zips = set(weather_df['postal_code'].astype(str))
+        weather_df = pd.read_csv(weather_data_file)
+        existing_zips = set(weather_df['postal_code'].astype(str))
 
-#         if len(existing_zips) - last_len == 0:  # check if hitting limits
-#             time.sleep(60)
-#         else:
-#             time.sleep(5)
-#         last_len = len(existing_zips)
+        if len(existing_zips) - last_len == 0:  # check if hitting limits
+            time.sleep(60)
+        else:
+            time.sleep(5)
+        last_len = len(existing_zips)
 
     df = aggregate_data(weather_file=weather_data_file, nyt_file=nyt_data_file)
     # calculate relative dates to the first day with 10 cases
