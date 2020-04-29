@@ -224,6 +224,12 @@ def add_population(processed: pd.DataFrame, population: pd.DataFrame):
 
 
 def get_model_data(date_range=(0, 14), pred_day=21):
+    """
+
+    :param date_range: integer measuring the number of days since first day w/ 10 cases
+    :param pred_day:
+    :return:
+    """
     data = pd.read_csv(processed_data_file)
 
     # ensure full coverage of interested dates
