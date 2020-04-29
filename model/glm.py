@@ -30,14 +30,22 @@ def prepare_model_data(date_range, pred_day, outcome):
 # Notes on write up
 """
 Purpose: is to understand what's the maximum number of days we can use to predict the y
-Hypothesis: the longer the interval of data collected, the more difficult it is to predict the change in the next 7-day
-Hypothesis:  
+Hypothesis: 
+
+1. 
+The longer the interval of data collected, the more difficult it is to predict the change in the next 7-day
+Longer interval does not help us predict better because the situation evolves fast
+
+2. 
+The intervals needed to predict death is different from that needed for cases. Long interval data helps predict
+deaths better than cases
 """
 
-periods = 20  # total number of days to try in each period
-output_df = pd.DataFrame()
-fig, axes = plt.subplots(2, 4)
 model_start_time = datetime.datetime.now().strftime('%m_%d_%H_%M')  # as a flag to track separate model results
+
+periods = 10  # total number of days to try in each period
+output_df = pd.DataFrame()
+fig, axes = plt.subplots(2, 4, figsize=(30, 20))
 
 # show decreasing predictability
 i = 0
@@ -61,17 +69,15 @@ for interval in range(4, 20, 2):
                 break
 
     for label in mae.keys():
-        axes[i % 2, i // 2].plot(range(len(mae[label])), mae[label], label=label)
-    axes[i % 2, i // 2].set_title(f'Trained on {interval}-days of Data')
-    axes[i % 2, i // 2].set_ylabel('MAE')
-    axes[i % 2, i // 2].set_xlabel('Prediction Start Day')
+        axes[i // 4, i % 4].plot(range(len(mae[label])), mae[label], label=label)
+    axes[i // 4, i % 4].set_title(f'Trained on {interval}-days of Data')
+    axes[i // 4, i % 4].set_ylabel('MAE')
+    axes[i // 4, i % 4].set_xlabel('Prediction Start Day')
     i += 1
+    if i == 5:
+        break
 
 plt.show()
-
-# plt.title('$R^2$ over Prediction Periods')
-# plt.legend()
-# plt.show()
 
 # plot factors predicting cases and deaths
 
