@@ -21,3 +21,6 @@ df_y = df[outcome]
 model_start_time = datetime.datetime.now().strftime('%m_%d_%H_%M')
 simplified_model.linear(pd.concat([df_x, df_y], axis=1), outcome=outcome, family='gaussian', seed=1,
                         model_name='gaussian', suffix=model_start_time)
+
+output_df = pd.read_csv(f'reports/model_coef_{model_start_time}.csv')
+set(output_df['r2'])
