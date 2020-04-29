@@ -4,6 +4,7 @@ import os
 import time
 import datetime
 import ast
+import re
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -17,6 +18,10 @@ processed_data_file = './data/processed/time_series.csv'
 
 today = datetime.datetime.today().strftime('%Y-%m-%d')
 
+mobility_file = './data/raw/Global_Mobility_Report.csv'
+income_file = './data/income/income.csv'
+population_file = './data/income/population.csv'
+states_file = './data/income/states_name.csv'
 
 def get_restaurant_data(zip_code):
     """
@@ -95,8 +100,103 @@ def get_zip_mapping():
     zip_df = zip_df[['county_fips_all', 'zip']]
     return zip_df
 
+def add_income(processed:pd.DataFrame, income:pd.DataFrame):
+    
+    '''
+    processed: time_series.csv without income
+    income: income csv file from gov
+    '''
+    
+    income_split = np.split(income, income[income.isnull().all(1)].index)[1:]
+    income_clean = pd.DataFrame()
+    for state in income_split:
+        state_name = state['County'][1:2].values
+        state['state'] = state_name[0]
+        if state_name == 'District of Columbia':
+            income_clean = income_clean.append(state[1:2])
+        else: 
+            income_clean = income_clean.append(state[2:])
+            
+    income_clean['state'] = income_clean['state'].str.lower()
+    income_clean['county'] = income_clean['County'].str.lower()
+    income_clean['income_2018'] = income_clean['2,018']
+    income_clean = income_clean.drop(['County','2,018'], axis=1)
+    income_clean = income_clean[['county','state','income_2018']]
+    
+    income_clean['income_2018'] = income_clean['income_2018'].map(lambda x: int(re.sub(',','', x)))
+    
+    # merge income
+    income_combined = pd.merge(processed, income_clean, on=['state','county'])
+    
+    return income_combined
 
-def aggregate_data(weather_file=weather_data_file, nyt_file=nyt_data_file):
+def add_population(processed:pd.DataFrame, population:pd.DataFrame):
+    
+    '''
+    processed: time_series.csv without population
+    income: population csv file from gov
+    '''
+    
+    states_name = pd.read_csv(states_file)
+    states = population['State']
+    
+    # find index of 
+    index_list = []
+    for state in states.unique():
+        index_list.append(states[(states == state)].index[0])
+    
+    population = population.drop(index_list)
+    population['Area_Name'] = population['Area_Name'].map(lambda x: re.sub(' County| City','', x)).str.lower()
+    dictionary = {short:long for (short,long) in zip(states_name['Code'], states_name['State'])}
+    population['State'] = population['State'].map(dictionary).str.lower()
+    
+    population = population[['State', 'Area_Name', 'POP_ESTIMATE_2018']]
+    population.columns = ['state','county', 'pop_2018']
+    
+    population['pop_2018'] = population['pop_2018'].map(lambda x: int(re.sub(',','', x)))
+    
+    df = pd.merge(processed, population, on=['state','county'])
+    
+    return df
+
+def update_mobility(processed:pd.DataFrame, mobility:pd.DataFrame):
+    
+    '''
+    processed: old time_series data
+    mobility: new mobility csv from Google
+    '''
+    
+    # clean mobility data
+    USA = mobility.loc[mobility['country_region'] == 'United States'].reset_index()
+    to_drop = ['index', 'country_region_code', 'country_region']
+    USA = USA.drop(to_drop, axis=1)
+    USA.insert(1, 'county', USA['sub_region_2'].str.lower())
+    USA = USA.drop(['sub_region_2'],axis=1)
+    USA['county'].loc[(USA['sub_region_1'] == 'District of Columbia')] = 'District of Columbia'
+    USA = USA.loc[~pd.isna(USA['county'])]
+    USA['county'] = USA['county'].map(lambda x: re.sub(' county| city','', x)).str.lower()
+    USA.insert(1, 'state', USA['sub_region_1'].str.lower())
+    USA = USA.drop(['sub_region_1'],axis=1)
+    
+    # prepare old time series data
+    processed['county'] = processed['county'].str.lower()
+    processed['state'] = processed['state'].str.lower()
+    
+    # take only subset of counties according to proccessed data
+    counties = pd.unique(processed['county'].str.lower().map(lambda x: re.sub(' city','', x)))
+    USA = USA.loc[USA['county'].str.lower().isin(counties)]
+    
+    # deal with duplicates
+    columns = set(USA.columns) - set(['state', 'county', 'date'])
+    agg = {key:'mean' for key in columns}
+    USA_grouped = USA.groupby(['state', 'county', 'date']).aggregate(agg)
+    
+    df = pd.merge(processed, USA_grouped, on=['date','county', 'state'], how='left')
+    
+    return df
+
+def aggregate_data(weather_file=weather_data_file, nyt_file=nyt_data_file, 
+                  mobility_file = mobility_file, income_file=income_file, population_file=population_file):
     weather_df = pd.read_csv(weather_file)
     weather_df['postal_code'] = weather_df['postal_code'].astype(str).str.pad(width=5, side='left', fillchar='0')
 
@@ -116,8 +216,16 @@ def aggregate_data(weather_file=weather_data_file, nyt_file=nyt_data_file):
                       how='inner')
     agg_df = agg_df.drop(['county_fips_all', 'timestamp'], axis=1)
 
-    return agg_df
+    mobility = pd.read_csv(mobility_file)
+    agg_df = update_mobility(agg_df, mobility)
+    
+    income = pd.read_csv(income_file)
+    agg_df = add_income(agg_df, income)
 
+    population = pd.read_csv(population_file)
+    agg_df = add_population(agg_df, population)
+
+    return agg_df
 
 def get_model_data(date_range=(0, 14), pred_day=21):
     df = pd.read_csv(processed_data_file)
@@ -174,7 +282,6 @@ if __name__ == '__main__':
         last_len = len(existing_zips)
 
     df = aggregate_data(weather_file=weather_data_file, nyt_file=nyt_data_file)
-
     # calculate relative dates to the first day with 10 cases
     first_date_df = nyt_df[nyt_df['cases'] >= 10].sort_values(['county', 'date']).groupby('fips')[
         'date'].first().reset_index()
