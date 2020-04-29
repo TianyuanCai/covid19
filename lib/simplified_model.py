@@ -19,6 +19,16 @@ from sklearn.pipeline import Pipeline
 from sklearn.metrics import make_scorer
 from sklearn.metrics import f1_score
 
+import matplotlib.pyplot as plt
+from statsmodels.stats.outliers_influence import variance_inflation_factor
+import itertools
+import difflib
+import pandas as pd
+from sklearn.exceptions import ConvergenceWarning
+from multiprocessing import Pool
+from joblib import Parallel, delayed
+import numpy as np
+
 import h2o
 from h2o.grid.grid_search import H2OGridSearch
 
@@ -62,6 +72,26 @@ def plot_roc(model_fit, x_test, y_test):
     plt.xlabel('False Positive Rate')
     plt.ylabel('True Positive Rate')
     plt.title('ROC curve (area = %0.2f)' % roc_auc)
+
+
+def multicollinearity_check(exog, thresh=5.0, frac=1):
+    """
+    Recursive VIF to ensure
+    1. The variable with the largest VIF is dropped first
+    2. Only the remaining columns are used for prediction
+    """
+    variables = [exog.columns[i] for i in range(exog.shape[1])]
+    exog_subset = exog.sample(frac=frac)
+    while True:
+        vif = Parallel(n_jobs=4, temp_folder='/tmp')(
+            delayed(variance_inflation_factor)(exog_subset[variables].values, ix) for ix in range(len(variables)))
+        max_loc = vif.index(max(vif))
+        if max(vif) > thresh:
+            variables.pop(max_loc)
+        else:
+            break
+
+    return exog[[i for i in variables]]
 
 
 def linear(data, outcome, family, seed=1, model_name='', suffix=''):
@@ -162,7 +192,7 @@ def linear(data, outcome, family, seed=1, model_name='', suffix=''):
     feature_df['RMSE'] = glm_unreg.rmse(valid=True)
     feature_df['delta_mae_lasso'] = delta_mae
 
-    model_coef_file = './reports/figures/model_coef_{}.csv'.format(suffix)
+    model_coef_file = './reports/model_coef_{}.csv'.format(suffix)
     if os.path.exists(model_coef_file):
         feature_df.to_csv(model_coef_file, index=False, header=False, mode='a')
     else:
