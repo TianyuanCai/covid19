@@ -77,7 +77,7 @@ def multicollinearity_check(exog, thresh=5.0, frac=1):
     return exog[[i for i in variables]]
 
 
-def linear(data, outcome, family, seed=1, model_name='', suffix=''):
+def linear(data, outcome, family, link='identity', seed=1, model_name='', suffix=''):
     data = pd.concat([data.drop(outcome, axis=1), data[outcome]], axis=1)
     df = h2o.H2OFrame(data)
 
@@ -94,7 +94,7 @@ def linear(data, outcome, family, seed=1, model_name='', suffix=''):
                        'seed': seed}
 
     glm_grid_lasso = H2OGridSearch(
-        model=H2OGeneralizedLinearEstimator(family=family, link='log', nfolds=5,
+        model=H2OGeneralizedLinearEstimator(family=family, link=link, nfolds=5,
                                             standardize=True,
                                             remove_collinear_columns=False),
         hyper_params=hyper_params, search_criteria=search_criteria)
@@ -126,7 +126,7 @@ def linear(data, outcome, family, seed=1, model_name='', suffix=''):
 
     try:
         glm_unreg = H2OGeneralizedLinearEstimator(model_id='glm_v1_unpenalized', family=family,
-                                                  link='log',
+                                                  link=link,
                                                   compute_p_values=True,
                                                   lambda_=0,
                                                   standardize=False,
@@ -163,6 +163,7 @@ def linear(data, outcome, family, seed=1, model_name='', suffix=''):
     feature_df['variable'] = [' '.join(x.split('_')[1:]).title() for x in feature_df['variable']]
     feature_df['time'] = datetime.datetime.now()
     feature_df['family'] = family
+    feature_df['link'] = link
     feature_df['model'] = model_name
     feature_df['outcome'] = outcome.replace('_', ' ').title()
     feature_df['obs'] = subset_df.shape[0]
@@ -180,6 +181,8 @@ def linear(data, outcome, family, seed=1, model_name='', suffix=''):
         feature_df.to_csv(model_coef_file, index=False, header=False, mode='a')
     else:
         feature_df.to_csv(model_coef_file, index=False)
+
+    return feature_df
 
 
 def gam(data, y, seed=1):
