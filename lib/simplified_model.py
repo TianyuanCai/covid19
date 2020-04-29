@@ -1,36 +1,19 @@
-import os
 import datetime
+import os
 
+import h2o
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import seaborn as sns
-from pygam import pygam
 import sklearn
 import sklearn.ensemble
 import sklearn.ensemble
-from sklearn.linear_model import LogisticRegression
-from sklearn.linear_model import RidgeClassifier
-from sklearn.metrics import roc_curve, auc
-from sklearn.model_selection import RandomizedSearchCV
-from sklearn.pipeline import Pipeline
-
-from sklearn.metrics import make_scorer
-from sklearn.metrics import f1_score
-
-import matplotlib.pyplot as plt
-from statsmodels.stats.outliers_influence import variance_inflation_factor
-import itertools
-import difflib
-import pandas as pd
-from sklearn.exceptions import ConvergenceWarning
-from multiprocessing import Pool
-from joblib import Parallel, delayed
-import numpy as np
-
-import h2o
 from h2o.grid.grid_search import H2OGridSearch
+from joblib import Parallel, delayed
+from pygam import pygam
+from sklearn.metrics import roc_curve, auc
+from statsmodels.stats.outliers_influence import variance_inflation_factor
 
 h2o.init(max_mem_size="16G")  # specify max number of bytes. uses all cores by default.
 h2o.remove_all()  # clean slate, in case cluster was already running
