@@ -249,9 +249,10 @@ def get_model_data(date_range=(0, 14), pred_day=21):
     data_y_delta = data_y_delta.drop(['index', 'days_since_10_cases'], axis=1)
     data_y_delta['fips'] = data_y.loc[day_idx, 'fips'].reset_index(drop=True)
     data_y_delta = data_y_delta.add_prefix(f'day_{pred_day}_delta_')
-    data_x = data_x.merge(data_y_delta, left_on='fips', right_on=f'day_{pred_day}_delta_fips', how='inner')
+    data = data_x.merge(data_y_delta, left_on='fips', right_on=f'day_{pred_day}_delta_fips', how='inner')
+    data = data.drop(f'day_{pred_day}_delta_fips', axis=1)
 
-    return data_x
+    return data
 
 
 update_weather = False
