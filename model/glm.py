@@ -43,9 +43,9 @@ deaths better than cases
 
 model_start_time = datetime.datetime.now().strftime('%m_%d_%H_%M')  # as a flag to track separate model results
 
-periods = 10  # total number of days to try in each period
+periods = 20  # total number of days to try in each period
 output_df = pd.DataFrame()
-fig, axes = plt.subplots(2, 4, figsize=(30, 20))
+fig, axes = plt.subplots(2, 4, figsize=(30, 15))
 
 # show decreasing predictability
 i = 0
@@ -73,10 +73,11 @@ for interval in range(4, 20, 2):
     axes[i // 4, i % 4].set_title(f'Trained on {interval}-days of Data')
     axes[i // 4, i % 4].set_ylabel('MAE')
     axes[i // 4, i % 4].set_xlabel('Prediction Start Day')
+    axes[i // 4, i % 4].legend()
     i += 1
-    if i == 5:
-        break
 
+handles, labels = axes[i // 4, i % 4].get_legend_handles_labels()
+fig.legend(handles, labels, loc='lower center')
 plt.show()
 
 # plot factors predicting cases and deaths
