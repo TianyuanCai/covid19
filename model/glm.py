@@ -1,11 +1,17 @@
+import sys
+
+# sys.path.append('../')
+
 import datetime
+from tqdm import tqdm
 
 import pandas as pd
 import numpy as np
-from lib import get_data
-from lib import simplified_model
 import matplotlib.pyplot as plt
 from matplotlib import rc
+
+from lib import get_data
+from lib import simplified_model
 
 rc('text', usetex=False)
 
@@ -43,13 +49,11 @@ deaths better than cases
 
 model_start_time = datetime.datetime.now().strftime('%m_%d_%H_%M')  # as a flag to track separate model results
 
-periods = 20  # total number of days to try in each period
+periods = 21  # total number of days to try in each period
 output_df = pd.DataFrame()
-fig, axes = plt.subplots(2, 4, figsize=(30, 15))
 
 # show decreasing predictability
-i = 0
-for interval in range(4, 20, 2):
+for interval in tqdm(range(4, 24, 4)):  # range of dates used for training data, from 4 days of training to 20
     mae = {'cases': [], 'deaths': []}  # todo outcome try actual n cases
     for day in range(periods):
         date_range = (day, day + interval)  # interval controls the length of data collected
@@ -57,28 +61,45 @@ for interval in range(4, 20, 2):
         print('---', date_range, y_day)
         for y in ['cases', 'deaths']:
             outcome = f'day_{y_day}_delta_{y}'
+            tmp_df = prepare_model_data(date_range, y_day, outcome)
+
+            if len(tmp_df) <= 200:
+                continue
+
             tmp_output_df = simplified_model.linear(prepare_model_data(date_range, y_day, outcome),
                                                     outcome=outcome, family='gaussian', link='identity', seed=1,
                                                     model_name=f'{date_range[0]}_{date_range[1]}_{y_day}',
                                                     suffix=model_start_time)
+
             try:
                 mae[y].append(list(set(tmp_output_df['mae']))[0])
+                tmp_output_df['start_date'] = date_range[0]
+                tmp_output_df['end_date'] = date_range[1]
+                tmp_output_df['interval'] = interval
+                tmp_output_df['pred_date'] = y_day
+                tmp_output_df['outcome_name'] = y
                 output_df = output_df.append(tmp_output_df)
             except TypeError:
                 print('--- No longer predictive')
                 break
 
-    for label in mae.keys():
-        axes[i // 4, i % 4].plot(range(len(mae[label])), mae[label], label=label)
-    axes[i // 4, i % 4].set_title(f'Trained on {interval}-days of Data')
-    axes[i // 4, i % 4].set_ylabel('MAE')
-    axes[i // 4, i % 4].set_xlabel('Prediction Start Day')
-    axes[i // 4, i % 4].legend()
-    i += 1
+output_df.to_csv(f'reports/model_coef_{model_start_time}.csv', index=False)
 
-handles, labels = axes[i // 4, i % 4].get_legend_handles_labels()
-fig.legend(handles, labels, loc='lower center')
-plt.show()
+# todo output separate performance table for plotting
+
+# todo plot
+
+# for label in mae.keys():
+#     axes[i // 4, i % 4].plot(range(len(mae[label])), mae[label], label=label)
+# axes[i // 4, i % 4].set_title(f'Trained on {interval}-days of Data')
+# axes[i // 4, i % 4].set_ylabel('MAE')
+# axes[i // 4, i % 4].set_xlabel('Prediction Start Day')
+# axes[i // 4, i % 4].legend()
+# i += 1
+
+# handles, labels = axes[(i - 1) // 4, (i - 1) % 4].get_legend_handles_labels()
+# fig.legend(handles, labels, loc='lower center')
+# plt.show()
 
 # plot factors predicting cases and deaths
 
