@@ -1,6 +1,4 @@
 import datetime
-import os
-
 import h2o
 import matplotlib
 import matplotlib.pyplot as plt
@@ -176,33 +174,36 @@ def linear(data, outcome, family, link='identity', seed=1, model_name='', suffix
     feature_df['RMSE'] = glm_unreg.rmse(valid=True)
     feature_df['delta_mae_lasso'] = delta_mae
 
-    model_coef_file = './reports/model_coef_{}.csv'.format(suffix)
-    if os.path.exists(model_coef_file):
-        feature_df.to_csv(model_coef_file, index=False, header=False, mode='a')
-    else:
-        feature_df.to_csv(model_coef_file, index=False)
+    # model_coef_file = '../reports/model_coef_{}.csv'.format(suffix)
+    # if os.path.exists(model_coef_file):
+    #     feature_df.to_csv(model_coef_file, index=False, header=False, mode='a')
+    # else:
+    #     feature_df.to_csv(model_coef_file, index=False)
 
     return feature_df
 
 
-def gam(data, y, seed=1):
+def linear_gam(data, y, seed=1):
     """GAM"""
     # Partial dependence plot where the the y-axis is the log-odds scale $\text{log}\left(\frac{p}{1-p}\right)$.
+    data = data.astype(float)
+    print(data.info())
     x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(
-        data.drop([y], axis=1), data[y], test_size=0.3, random_state=seed)
+        data.drop([y], axis=1), data[y], test_size=0.2, random_state=seed)
     data = data.drop([y], axis=1)
 
-    model = pygam.LogisticGAM(max_iter=200).gridsearch(
-        x_train, y_train, lam=np.logspace(-1, 5, 4))
+    model = pygam.LinearGAM(max_iter=200).gridsearch(x_train.values, y_train.values, lam=np.logspace(-1, 5, 4))
 
-    report = sklearn.metrics.classification_report(
-        y_test, model.predict(x_test.values), output_dict=True)
-    print(pd.DataFrame(report).transpose())
+    metric = sklearn.metrics.mean_absolute_error(y_test, model.predict(x_test.values))
+    print(metric)
 
-    fig, axs = plt.subplots(int(np.ceil(len(data.drop([y], axis=1).columns) / 3)), 3, figsize=(20, 30))
-    titles = data.drop([y], axis=1).columns
+    fig, axs = plt.subplots(int(np.ceil(len(data) / 3)), 3, figsize=(20, 30))
+    titles = data.columns
     for i in range(x_train.shape[1]):
         XX = model.generate_X_grid(term=i)
         axs[i // 3, i % 3].plot(XX[:, i], model.partial_dependence(term=i, X=XX))
         axs[i // 3, i % 3].plot(XX[:, i], model.partial_dependence(term=i, X=XX, width=.95)[1], c='r', ls='--')
         axs[i // 3, i % 3].set_title(titles[i])
+    plt.show()
+
+    return fig

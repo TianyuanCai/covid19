@@ -104,7 +104,7 @@ def get_weather_data(zip_code, end_date, start_date='2020-01-01'):
 
 
 def get_zip_mapping():
-    zip_data = pd.read_csv('../data/raw/uszips.csv')
+    zip_data = pd.read_csv(base_path / '../data/raw/uszips.csv')
     zip_data['zip'] = zip_data['zip'].astype(str).str.pad(width=5, side='left', fillchar='0')
     zip_data['county_fips_all'] = zip_data['county_fips_all'].str.split('|')
     zip_data = zip_data.explode('county_fips_all')  # convert row to fip level before re-aggregate
