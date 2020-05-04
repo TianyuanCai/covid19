@@ -22,8 +22,8 @@ def prepare_model_data(date_range, pred_day, outcome):
 
     df_x = simplified_model.multicollinearity_check(
         df.drop([f'day_{pred_day}_delta_cases', f'day_{pred_day}_delta_deaths', 'state', 'county', 'fips'], axis=1))
-    df_x = df_x.rename({'deaths': 'past_deaths', 'cases': 'past_cases'}, axis=1)
 
+    df_x = df_x.rename({'deaths': 'past_deaths', 'cases': 'past_cases'}, axis=1)
     df_y = df[[f'day_{pred_day}_delta_{outcome}']]
     df_y = df_y.rename({f'day_{pred_day}_delta_{outcome}': outcome}, axis=1)
     df_model = pd.concat([df_x, df_y], axis=1)
