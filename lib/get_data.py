@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import datetime
 import json
 import os
@@ -9,20 +11,25 @@ import pandas as pd
 import requests
 from tqdm import tqdm
 
-income_path = '../data/income/'
-processed_path = '../data/processed/'
-raw_path = '../data/raw/'
+import sys
 
-restaurant_data_file = '../data/raw/restaurants.csv'
-weather_data_file = '../data/raw/weather.csv'
-nyt_data_file = '../data/nytimes_covid19_data/20200423_us-counties.csv'
-processed_data_file = '../data/processed/time_series_all.csv'
+base_path = Path(__file__).parent
+print(base_path)
+
+income_path = base_path / '../data/income/'
+processed_path = base_path / '../data/processed/'
+raw_path = base_path / '../data/raw/'
+
+restaurant_data_file = base_path / '../data/raw/restaurants.csv'
+weather_data_file = base_path / '../data/raw/weather.csv'
+nyt_data_file = base_path / '../data/nytimes_covid19_data/20200423_us-counties.csv'
+processed_data_file = base_path / '../data/processed/time_series_all.csv'
 
 nyt_df = pd.read_csv(nyt_data_file)
-income_df = pd.read_csv(income_path + 'income.csv')
-states_name_df = pd.read_csv(income_path + 'states_name.csv')
-population_df = pd.read_csv(income_path + 'population.csv')
-mobility_df = pd.read_csv(raw_path + 'Global_Mobility_Report.csv', low_memory=False)
+income_df = pd.read_csv(base_path / '../data/income/income.csv')
+states_name_df = pd.read_csv(base_path / '../data/income/states_name.csv')
+population_df = pd.read_csv(base_path / '../data/income/population.csv')
+mobility_df = pd.read_csv(base_path / '../data/raw/Global_Mobility_Report.csv', low_memory=False)
 
 today = datetime.datetime.today().strftime('%Y-%m-%d')
 
@@ -97,7 +104,7 @@ def get_weather_data(zip_code, end_date, start_date='2020-01-01'):
 
 
 def get_zip_mapping():
-    zip_data = pd.read_csv('../data/raw/uszips.csv')
+    zip_data = pd.read_csv(base_path / '../data/raw/uszips.csv')
     zip_data['zip'] = zip_data['zip'].astype(str).str.pad(width=5, side='left', fillchar='0')
     zip_data['county_fips_all'] = zip_data['county_fips_all'].str.split('|')
     zip_data = zip_data.explode('county_fips_all')  # convert row to fip level before re-aggregate
@@ -209,7 +216,7 @@ def add_population(processed: pd.DataFrame, population: pd.DataFrame):
     population = population.drop(index_list)
     population['Area_Name'] = population['Area_Name'].map(lambda x: re.sub(' County| City', '', x)).str.lower()
 
-    states_name = pd.read_csv(income_path + 'states_name.csv')
+    states_name = pd.read_csv(os.path.abspath('./data/income/states_name.csv'))
     dictionary = {short: long for (short, long) in zip(states_name['Code'], states_name['State'])}
     population['State'] = population['State'].map(dictionary).str.lower()
 
