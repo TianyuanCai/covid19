@@ -197,7 +197,7 @@ def linear_gam(data, y, seed=1):
     metric = sklearn.metrics.mean_absolute_error(y_test, model.predict(x_test.values))
     print(metric)
 
-    fig, axs = plt.subplots(int(np.ceil(len(data) / 3)), 3, figsize=(20, 30))
+    fig, axs = plt.subplots(int(np.ceil(data.shape[1] / 3)), 3, figsize=(20, 30))
     titles = data.columns
     for i in range(x_train.shape[1]):
         XX = model.generate_X_grid(term=i)
