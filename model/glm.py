@@ -32,6 +32,19 @@ def prepare_model_data(date_range, pred_day, outcome):
     return df_model
 
 
+for y in ['cases', 'deaths']:
+    n_obs = 0
+    test_df = pd.DataFrame()
+    for i in tqdm(range(2, 30)):
+        df = prepare_model_data((0, i - 1), i, y)
+        test_df = test_df.append(df[df[y] < 0])
+        n_obs += len(df)
+
+    test_df[y].hist(bins=50)
+    plt.title(f'n {y}')
+    plt.show()
+    print(y, n_obs/len(test_df))
+
 model_start_time = datetime.datetime.now().strftime('%m_%d_%H_%M')  # as a flag to track separate model results
 
 periods = 30  # total number of days to try in each period
