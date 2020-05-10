@@ -21,40 +21,6 @@ from h2o.estimators.glm import H2OGeneralizedLinearEstimator
 matplotlib.rc('text', usetex=True)
 
 
-def setfont(font='ptmr8r'):
-    return r'\font\a %s at 14pt\a ' % font
-
-
-def cmatrix(y_true, y_pred):
-    cm = sklearn.metrics.confusion_matrix(y_true, y_pred)
-    cm = pd.DataFrame(cm)
-    cm.columns = ['Predicted Negative', 'Predicted Positive']
-    cm.index = ['True Negative', 'True Positive']
-    print(cm)
-
-
-def plot_roc(model_fit, x_test, y_test):
-    y_score = model_fit.decision_function(x_test)
-
-    fpr = dict()
-    tpr = dict()
-    roc_auc = dict()
-
-    for i in range(2):
-        fpr, tpr, _ = roc_curve(y_test, y_score)
-        roc_auc = auc(fpr, tpr)
-
-    plt.cla().clf()
-    plt.figure()
-    plt.plot(fpr, tpr, color='darkorange')
-    plt.plot([0, 1], [0, 1], color='navy', linestyle='--')
-    plt.xlim([0.0, 1.0])
-    plt.ylim([0.0, 1.05])
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    plt.title('ROC curve (area = %0.2f)' % roc_auc)
-
-
 def multicollinearity_check(exog, thresh=5.0, frac=1):
     """
     Recursive VIF to ensure
@@ -64,6 +30,7 @@ def multicollinearity_check(exog, thresh=5.0, frac=1):
     variables = [exog.columns[i] for i in range(exog.shape[1])]
     exog_subset = exog.sample(frac=frac)
     while True:
+        # run VIF in parallel
         vif = Parallel(n_jobs=4, temp_folder='/tmp')(
             delayed(variance_inflation_factor)(exog_subset[variables].values, ix) for ix in range(len(variables)))
         max_loc = vif.index(max(vif))
@@ -76,6 +43,23 @@ def multicollinearity_check(exog, thresh=5.0, frac=1):
 
 
 def linear(data, outcome, family, link='identity', seed=1, model_name='', suffix=''):
+    """
+    Fit linear model using H2O
+
+    we first use L1 regularization on the subset of variables to do further feature selection based on the standardized
+    and normalized data set. Using the subset of the variable selected by regularization, we then fit an unregularized
+    and unstandardized model in order to retain the interpretability of the model. All these processes are performed in
+    the helper function folded into the simplified_model module.
+
+    :param data:
+    :param outcome:
+    :param family:
+    :param link:
+    :param seed:
+    :param model_name:
+    :param suffix:
+    :return:
+    """
     data = pd.concat([data.drop(outcome, axis=1), data[outcome]], axis=1)
     df = h2o.H2OFrame(data)
 
@@ -181,29 +165,3 @@ def linear(data, outcome, family, link='identity', seed=1, model_name='', suffix
     #     feature_df.to_csv(model_coef_file, index=False)
 
     return feature_df
-
-
-def linear_gam(data, y, seed=1):
-    """GAM"""
-    # Partial dependence plot where the the y-axis is the log-odds scale $\text{log}\left(\frac{p}{1-p}\right)$.
-    data = data.astype(float)
-    print(data.info())
-    x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(
-        data.drop([y], axis=1), data[y], test_size=0.2, random_state=seed)
-    data = data.drop([y], axis=1)
-
-    model = pygam.LinearGAM(max_iter=200).gridsearch(x_train.values, y_train.values, lam=np.logspace(-1, 5, 4))
-
-    metric = sklearn.metrics.mean_absolute_error(y_test, model.predict(x_test.values))
-    print(metric)
-
-    fig, axs = plt.subplots(int(np.ceil(data.shape[1] / 3)), 3, figsize=(20, 30))
-    titles = data.columns
-    for i in range(x_train.shape[1]):
-        XX = model.generate_X_grid(term=i)
-        axs[i // 3, i % 3].plot(XX[:, i], model.partial_dependence(term=i, X=XX))
-        axs[i // 3, i % 3].plot(XX[:, i], model.partial_dependence(term=i, X=XX, width=.95)[1], c='r', ls='--')
-        axs[i // 3, i % 3].set_title(titles[i])
-    plt.show()
-
-    return fig
