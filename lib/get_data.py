@@ -113,6 +113,13 @@ def get_zip_mapping():
 
 
 def aggregate_data(weather_file=weather_data_file, nyt_file=nyt_data_file):
+    """
+    Combine all the data needed for modeling together and clean up the variables
+
+    :param weather_file:
+    :param nyt_file:
+    :return:
+    """
     weather_data = pd.read_csv(weather_file)
     weather_data['postal_code'] = weather_data['postal_code'].astype(str).str.pad(width=5, side='left', fillchar='0')
 
@@ -136,10 +143,10 @@ def aggregate_data(weather_file=weather_data_file, nyt_file=nyt_data_file):
 
 
 def update_mobility(processed: pd.DataFrame, mobility: pd.DataFrame):
-    '''
+    """
     processed: old time_series data
     mobility: new mobility csv from Google
-    '''
+    """
 
     # clean mobility data
     USA = mobility.loc[mobility['country_region'] == 'United States'].reset_index()
@@ -172,10 +179,10 @@ def update_mobility(processed: pd.DataFrame, mobility: pd.DataFrame):
 
 
 def add_income(processed: pd.DataFrame, income: pd.DataFrame):
-    '''
+    """
     processed: time_series.csv without income
     income: income csv file from gov
-    '''
+    """
 
     income_split = np.split(income, income[income.isnull().all(1)].index)[1:]
     income_clean = pd.DataFrame()
@@ -202,10 +209,10 @@ def add_income(processed: pd.DataFrame, income: pd.DataFrame):
 
 
 def add_population(processed: pd.DataFrame, population: pd.DataFrame):
-    '''
+    """
     processed: time_series.csv without population
     income: population csv file from gov
-    '''
+    """
     states = population['State']
 
     # find index of
@@ -232,6 +239,11 @@ def add_population(processed: pd.DataFrame, population: pd.DataFrame):
 
 def get_model_data(date_range=(0, 14), pred_day=21):
     """
+    the get_model_data helper function first prepares data into the “7-day training 3-day change prediction” model task.
+    We compress the seven rows of the “7-day training” data for each county into one observation to avoid autocorrelation,
+    and the compression is done by taking the county-level mean of raw time series NYT data to create one observation per
+    county for the 7-day period. We then append the prediction target – the change in the number of cases – onto the same
+    data set
 
     :param date_range: integer measuring the number of days since first day w/ 10 cases
     :param pred_day:
