@@ -51,9 +51,8 @@ def get_restaurant_data(zip_code):
         url = f'https://api.yelp.com/v3/businesses/search?term=restaurant&location={zip_code}&limit={limit}&offset=' \
               f'{len(restaurant_df)}'
         r = requests.get(url, headers={
-            "Authorization": "Bearer C4f1EztmmT5nYgEqH6B4XxqIwP8Hv2xwaiXbnodamVTQ7XfnLcFBNm7pi"
-                             "-2hpXagZjojbD_yyL8kPW4xqAe"
-                             "-eXZqbiM8-Z4T8oz761O57z1do17P21utYvfzpXuKXnYx"})
+            "Authorization": os.getenv('WEATHER_API_KEY')
+        })
 
         try:
             tmp_df = pd.json_normalize(json.loads(r.text)['businesses'])
